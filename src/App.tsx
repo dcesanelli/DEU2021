@@ -4,7 +4,6 @@ import {
   Route
 } from "react-router-dom";
 import Congrats from "./pages/Congrats";
-import Home from "./pages/Home";
 import Game from "./pages/Game";
 
 function App() {
@@ -19,7 +18,7 @@ function App() {
             <Game />
           </Route>
           <Route path="/">
-            <Home />
+            <Game />
           </Route>
         </Switch>
       </div>
