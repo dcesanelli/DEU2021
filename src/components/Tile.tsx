@@ -10,12 +10,12 @@ type TileProps = {
   handleTileClick: (index: number) => void,
   boardSize: number,
   gridSize: number,
-  showNumbers: boolean
+  showNumbers: boolean,
+  isSolved: boolean
 }
 
 function Tile(props: TileProps) {
-  const { tile, index, width, height, handleTileClick, imgUrl, boardSize, gridSize, showNumbers } = props;
-  console.log("Imagen usada:", imgUrl)
+  const { tile, index, width, height, handleTileClick, imgUrl, boardSize, gridSize, showNumbers, isSolved } = props;
   const { row, col } = {
     row: Math.floor(index / gridSize),
     col: index % gridSize,
@@ -31,15 +31,18 @@ function Tile(props: TileProps) {
     translateX: visualPos.x,
     translateY: visualPos.y,
     backgroundImage: `url(${imgUrl})`,
-    backgroundSize: `${boardSize * 1.25}px`,
-    backgroundPosition: `${(100 / gridSize) * (tile % gridSize)}% ${(100 / gridSize) * (Math.floor(tile / gridSize))}%`,
+    backgroundSize: `${boardSize}px`,
+    backgroundPosition: `${(boardSize / gridSize * -1) * (tile % gridSize)}px ${(boardSize / gridSize * -1) * (Math.floor(tile / gridSize))}px`,
 
   };
   const motionStyle = {
     translateX: spring(visualPos.x),
     translateY: spring(visualPos.y)
   }
-
+  const numberStyle = {
+    color: 'white'
+    // ToDO: meter circulito gris opaco para que haga contraste con cualquier color
+  }
   return (
     <Motion style={motionStyle}>
       {({ translateX, translateY }) => (
@@ -47,13 +50,13 @@ function Tile(props: TileProps) {
           style={{
             ...tileStyle,
             transform: `translate3d(${translateX}px, ${translateY}px, 0)`,
-            // Si es el último se oculta
-            opacity: tile === (gridSize * gridSize) - 1 ? 0 : 1,
+            // Si es el último y no está resuelto, se oculta
+            opacity: !isSolved && (tile === (gridSize * gridSize) - 1) ? 0 : 1,
           }}
           className="tile"
           onClick={() => handleTileClick(index)}
         >
-          {(!imgUrl || showNumbers) && `${tile + 1}`}
+          {(!imgUrl || showNumbers) && <div style={numberStyle}>{`${tile + 1}`}</div>}
         </li>
       )}
     </Motion>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, CSSProperties } from "react";
 
-import { useHistory, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Board from "../components/Board";
 import images from "../components/images";
 import Typography from '@material-ui/core/Typography';
@@ -12,8 +12,8 @@ function Game() {
   const [gridSize, setGridSize] = useState(4);
   const [boardSize, setBoardSize] = useState(320);
   const [showNumbers, setShowNumbers] = useState(true);
+  const [imageIndex, setImageIndex] = useState(1);
   const location = useLocation();
-  const history = useHistory();
 
   useEffect(() => {
     setBoardSize(480);
@@ -37,33 +37,41 @@ function Game() {
   const containerApp: CSSProperties = {
     margin: '2%',
     padding: '3% 0%',
-    backgroundColor: '#a3d2ca' ,
+    backgroundColor: '#a3d2ca',
     borderRadius: '15px',
-    display : 'flex',
+    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingInline:'5%',
+    paddingInline: '5%',
     marginInline: '6%'
   }
 
   const showNumbersHandler = () => {
-    setShowNumbers(! showNumbers)
+    setShowNumbers(!showNumbers)
   }
 
   const nextImageHanlder = () => {
-    let random = Math.floor(Math.random() * (images.length - 1)); 
-    console.log(random)
-    setImgUrl(images[random].image)
+    // ToDo: Le saque el random porque repetia demaciado
+    // let random = Math.floor(Math.random() * (images.length - 1));
+    // console.log(random)
+    // setImgUrl(images[random].image)
+    if (imageIndex === images.length - 1) {
+      setImageIndex(0);
+    } else {
+      setImageIndex(imageIndex + 1);
+    }
+
+    setImgUrl(images[imageIndex].image);
   }
 
   return <>
-    <Typography style={{textAlign:'center'}} variant="h2" component="h2" gutterBottom>
+    <Typography style={{ textAlign: 'center' }} variant="h2" component="h2" gutterBottom>
       Mega Puzzle
     </Typography>
     <div style={containerApp}>
-      <LeftPanel onSwitchChange={showNumbersHandler} showNumbers={showNumbers}/>
+      <LeftPanel onSwitchChange={showNumbersHandler} showNumbers={showNumbers} />
       <div >
-      <Board boardSize={boardSize} gridSize={gridSize} imgUrl={imgUrl} showNumbers={showNumbers} />
+        <Board boardSize={boardSize} gridSize={gridSize} imgUrl={imgUrl} showNumbers={showNumbers} />
       </div>
       <RightPanel nextImage={nextImageHanlder} />
     </div>

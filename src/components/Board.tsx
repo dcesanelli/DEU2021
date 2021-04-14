@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
 import Tile from "./Tile";
 type BoardProps = {
   boardSize: number,
@@ -13,8 +12,6 @@ function Board(props: BoardProps) {
   const [tiles, setTiles] = useState([...Array(gridSize * gridSize).keys()]);
   const [isStarted, setIsStarted] = useState(false);
   const [pieceSize, setPieceSize] = useState(Math.round(boardSize / gridSize));
-
-  const history = useHistory();
 
   function isSolvable(tiles: number[]) {
     let product = 1;
@@ -97,9 +94,9 @@ function Board(props: BoardProps) {
     setIsStarted(false);
   }, [boardSize, gridSize]);
 
-  // Si el juego inició y esta resuelto paso a la pantalla final
+  // Si el juego inició y esta resuelto muestro el texto final
   if (isStarted && isSolved(tiles)) {
-    history.push('/final')
+    // ToDo: Mostrar Texto/ Video 
   }
 
   return (
@@ -121,6 +118,7 @@ function Board(props: BoardProps) {
               boardSize={boardSize}
               gridSize={gridSize}
               showNumbers={showNumbers}
+              isSolved={isStarted && isSolved(tiles)}
             />
           ))
         }
