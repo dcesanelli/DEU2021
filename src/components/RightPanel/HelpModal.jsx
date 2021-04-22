@@ -62,7 +62,7 @@ export default function HelpModal() {
   });
 
   return (
-    <div>
+    <div style={{ marginBottom: '30%' }}>
         <Box className="box" >
           <Button color="secondary" variant="contained" onClick={handleOpen}> Como se juega <HelpOutlineTwoToneIcon/></Button>
         </Box >

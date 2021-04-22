@@ -36,3 +36,10 @@ h1 {
 button {
   display: block;
 }
+
+@font-face {
+  font-family: "gameria";
+  src: local("gameria"),
+    url("./fonts/GAMERIA.ttf") format("truetype");
+  font-weight: normal;
+}

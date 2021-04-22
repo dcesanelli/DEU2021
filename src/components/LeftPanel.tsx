@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom";
-import React from "react";
+import Typography from '@material-ui/core/Typography';
 import Switches from "./LeftPanel/Switches";
 import MotionButton from "./LeftPanel/MotionButton";
 
@@ -14,6 +14,9 @@ function LeftPanel(props: LeftPanelProps) {
   const history = useHistory();
   return <>
     <div style={{}}>
+      <Typography style={{ textAlign: 'center' }} variant="h3" component="h3" gutterBottom>
+        Dificultad
+      </Typography>
       <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
         <MotionButton onClick={() => history.push('/juego/facil')} texto="Facil" />
         <MotionButton onClick={() => history.push('/juego/medio')} texto="Medio" />

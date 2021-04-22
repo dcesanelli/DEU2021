@@ -5,12 +5,13 @@ type BoardProps = {
   boardSize: number,
   gridSize: number,
   imgUrl: string,
-  showNumbers: boolean
+  showNumbers: boolean,
+  isStarted: boolean,
+  onStart: () => void
 }
 function Board(props: BoardProps) {
-  const { boardSize, gridSize, imgUrl, showNumbers } = props;
+  const { boardSize, gridSize, imgUrl, showNumbers,isStarted,onStart } = props;
   const [tiles, setTiles] = useState([...Array(gridSize * gridSize).keys()]);
-  const [isStarted, setIsStarted] = useState(false);
   const [pieceSize, setPieceSize] = useState(Math.round(boardSize / gridSize));
 
   function isSolvable(tiles: number[]) {
@@ -85,13 +86,12 @@ function Board(props: BoardProps) {
 
   const handleStartClick = () => {
     shuffleTiles()
-    setIsStarted(true)
+    onStart()
   }
 
   useEffect(() => {
     setPieceSize(Math.round(boardSize / gridSize));
     setTiles([...Array(gridSize * gridSize).keys()]);
-    setIsStarted(false);
   }, [boardSize, gridSize]);
 
   // Si el juego inició y esta resuelto muestro el texto final
