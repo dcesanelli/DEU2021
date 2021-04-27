@@ -71,7 +71,7 @@ function Game() {
       Mega Puzzle
     </Typography>
     <div style={containerApp}>
-      <LeftPanel onSwitchChange={showNumbersHandler} showNumbers={showNumbers} />
+      <LeftPanel onSwitchChange={showNumbersHandler} showNumbers={showNumbers} changeSize={setBoardSize} />
       <div >
         <Board isStarted={isStarted} onStart={onStartHandler} boardSize={boardSize} gridSize={gridSize} imgUrl={imgUrl} showNumbers={showNumbers} />
       </div>

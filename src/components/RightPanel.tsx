@@ -37,7 +37,7 @@ const Box = posed.div({
 
 
 function RightPanel(props: RightPanelProps) {
-
+  const { nextImage, onStart} = props;
   return <>
     <div style={{textAlign: 'center',justifyContent: 'space-between'}}>
       <HelpModal />
@@ -48,13 +48,13 @@ function RightPanel(props: RightPanelProps) {
         848596
       </Typography>
       <Box className="box" >
-        <Button onClick={props.nextImage}  style={{marginBottom: '15%'}} variant="contained" color="primary" > Mezclar </Button>
+        <Button onClick={nextImage}  style={{marginBottom: '15%'}} variant="contained" color="primary" > Mezclar </Button>
       </Box>
       <Box className="box" >
-        <Button onClick={props.nextImage}  style={{marginBottom: '15%'}} variant="contained" color="primary" > Siguiente </Button>
+        <Button onClick={nextImage}  style={{marginBottom: '15%'}} variant="contained" color="primary" > Siguiente </Button>
       </Box>
       <Box className="box" style={{marginBottom: '10%'}} >
-        <Button onClick={props.onStart}  variant="contained" color="primary" > Comenzar </Button>
+        <Button onClick={onStart}  variant="contained" color="primary" > Comenzar </Button>
       </Box>
       
     </div>
