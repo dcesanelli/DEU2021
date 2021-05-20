@@ -57,6 +57,7 @@ function Game() {
           textAlign: 'center',
           marginTop: '10px',
           fontFamily: 'gameria',
+          color:'#feffde'
         }}
         variant='h2'
         component='h2'

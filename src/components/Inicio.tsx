@@ -1,8 +1,9 @@
 import { useHistory } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Switches from './Switches';
+import HelpModal from './HelpModal';
 import MotionButton from './MotionButton';
-import React from 'react';
+import {  CSSProperties } from 'react';
 import { Button } from '@material-ui/core';
 
 type InicioProps = {
@@ -12,25 +13,33 @@ type InicioProps = {
   onStart: () => void;
 };
 
+const containerApp: CSSProperties = {
+  margin: '1% 3%',
+  padding: '2% 0%',
+  backgroundColor: '#a3d2ca',
+  borderRadius: '15px',
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  paddingInline: '5%',
+  marginInline: '6%',
+};
+
 function Inicio(props: InicioProps) {
   const history = useHistory();
   const { showNumbers, onSwitchChange, changeSize, onStart } = props;
   return (
     <>
       <div style={{}}>
-        <Typography
-          style={{ textAlign: 'center' }}
-          variant='h3'
-          component='h3'
-          gutterBottom>
-          Dificultad
-        </Typography>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-          }}>
+        
+        <div style={containerApp}>
+          <Typography
+            style={{ textAlign: 'center' }}
+            variant='h3'
+            component='h3'
+            gutterBottom>
+            Dificultad
+          </Typography>
           <MotionButton
             onClick={() => history.push('/juego/facil')}
             texto='Facil'
