@@ -1,18 +1,36 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import Tile from "./Tile";
+import { Button } from '@material-ui/core';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
+import posed from 'react-pose';
+import { useHistory } from 'react-router-dom';
+import HelpModal from './HelpModal';
+import images from './images';
+import Tile from './Tile';
+import VerImagen from './VerImagen';
 type BoardProps = {
-  boardSize: number,
-  gridSize: number,
-  imgUrl: string,
-  showNumbers: boolean,
-  isStarted: boolean,
-  onStart: () => void
-}
+  boardSize: number;
+  gridSize: number;
+  showNumbers: boolean;
+  isStarted: boolean;
+  onStart: () => void;
+};
 function Board(props: BoardProps) {
-  const { boardSize, gridSize, imgUrl, showNumbers,isStarted,onStart } = props;
+  const { boardSize, gridSize, showNumbers, isStarted, onStart } = props;
   const [tiles, setTiles] = useState([...Array(gridSize * gridSize).keys()]);
   const [pieceSize, setPieceSize] = useState(Math.round(boardSize / gridSize));
+  const [imgUrl, setImgUrl] = useState('');
+  const [imageIndex, setImageIndex] = useState(1);
+  const history = useHistory();
+
+  const nextImageHanlder = () => {
+    if (imageIndex === images.length - 1) {
+      setImageIndex(0);
+    } else {
+      setImageIndex(imageIndex + 1);
+    }
+
+    setImgUrl(images[imageIndex].image);
+  };
 
   function isSolvable(tiles: number[]) {
     let product = 1;
@@ -60,74 +78,128 @@ function Board(props: BoardProps) {
 
   function swap(tiles: number[], src: number, dest: number) {
     const tilesResult = [...tiles];
-    [tilesResult[src], tilesResult[dest]] = [tilesResult[dest], tilesResult[src]];
+    [tilesResult[src], tilesResult[dest]] = [
+      tilesResult[dest],
+      tilesResult[src],
+    ];
     return tilesResult;
   }
 
   const shuffleTiles = () => {
-    const shuffledTiles = shuffle(tiles)
+    const shuffledTiles = shuffle(tiles);
     setTiles(shuffledTiles);
-  }
+  };
 
   const swapTiles = (tileIndex: number) => {
     if (canSwap(tileIndex, tiles.indexOf(tiles.length - 1))) {
-      const swappedTiles = swap(tiles, tileIndex, tiles.indexOf(tiles.length - 1))
-      setTiles(swappedTiles)
+      const swappedTiles = swap(
+        tiles,
+        tileIndex,
+        tiles.indexOf(tiles.length - 1)
+      );
+      setTiles(swappedTiles);
+
+      // Si el juego inició y esta resuelto muestro el texto final
+      if (isStarted && isSolved(swappedTiles)) {
+        history.push('/final');
+      }
     }
-  }
+  };
 
   const handleTileClick = (index: number) => {
-    swapTiles(index)
-  }
+    swapTiles(index);
+  };
 
   const handleShuffleClick = () => {
-    shuffleTiles()
-  }
-
-  const handleStartClick = () => {
-    shuffleTiles()
-    onStart()
-  }
+    shuffleTiles();
+  };
 
   useEffect(() => {
     setPieceSize(Math.round(boardSize / gridSize));
     setTiles([...Array(gridSize * gridSize).keys()]);
   }, [boardSize, gridSize]);
 
-  // Si el juego inició y esta resuelto muestro el texto final
-  if (isStarted && isSolved(tiles)) {
-    // ToDo: Mostrar Texto/ Video 
-  }
+  useEffect(() => {
+    shuffleTiles();
+  }, []);
+
+  const Box = posed.div({
+    hoverable: true,
+    pressable: true,
+    focusable: true,
+    init: {
+      scale: 1.1,
+      boxShadow: '0px 0px 0px rgba(0,0,0,0)',
+    },
+    hover: {
+      scale: 1,
+      boxShadow: '0px 0px 0px rgba(0,0,0,0)',
+    },
+    press: {
+      scale: 1.2,
+      boxShadow: '0px 0px 0px rgba(0,0,0,0)',
+    },
+    focus: { scale: 1.2 },
+    blur: {
+      scale: 1,
+      transition: {
+        type: 'spring',
+        stiffness: 800,
+      },
+    },
+  });
 
   return (
     <>
-      <ul style={{
-        width: boardSize,
-        height: boardSize,
-      }} className="board" >
-        {
-          tiles.map((tile, index) => (
-            <Tile
-              key={tile}
-              index={index}
-              imgUrl={imgUrl}
-              tile={tile}
-              width={pieceSize}
-              height={pieceSize}
-              handleTileClick={handleTileClick}
-              boardSize={boardSize}
-              gridSize={gridSize}
-              showNumbers={showNumbers}
-              isSolved={isStarted && isSolved(tiles)}
-            />
-          ))
-        }
+      <ul
+        style={{
+          width: boardSize,
+          height: boardSize,
+        }}
+        className='board'>
+        {tiles.map((tile, index) => (
+          <Tile
+            key={tile}
+            index={index}
+            imgUrl={imgUrl}
+            tile={tile}
+            width={pieceSize}
+            height={pieceSize}
+            handleTileClick={handleTileClick}
+            boardSize={boardSize}
+            gridSize={gridSize}
+            showNumbers={showNumbers}
+            isSolved={isStarted && isSolved(tiles)}
+          />
+        ))}
       </ul>
-      {
-        !isStarted ?
-          (<button onClick={() => handleStartClick()
-          }> Mezclar!!!! </button>) :
-          (<button onClick={() => handleShuffleClick()}> Reiniciar!!!!! </button>)}
+      <div>
+        <Box className='box'>
+          <Button
+            onClick={handleShuffleClick}
+            variant='contained'
+            color='primary'>
+            Mezclar
+          </Button>
+        </Box>
+        <Box className='box'>
+          <Button
+            onClick={nextImageHanlder}
+            variant='contained'
+            color='primary'>
+            Próxima Imagen
+          </Button>
+        </Box>
+        <VerImagen imgUrl={imgUrl} />
+      </div>
+      <div>
+        <Box className='box'>
+          <Button onClick={onStart} variant='contained' color='primary'>
+            Abandonar
+          </Button>
+        </Box>
+        <HelpModal />
+      </div>
     </>
   );
 }

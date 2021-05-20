@@ -1,3 +1,4 @@
+import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -5,6 +6,7 @@ import {
 } from "react-router-dom";
 import Congrats from "./pages/Congrats";
 import Game from "./pages/Game";
+import Landing from "./pages/Landing";
 
 function App() {
   return (
@@ -18,7 +20,7 @@ function App() {
             <Game />
           </Route>
           <Route path="/">
-            <Game />
+            <Landing />
           </Route>
         </Switch>
       </div>
