@@ -1,7 +1,6 @@
 import { Button } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import posed from 'react-pose';
 import { useHistory } from 'react-router-dom';
 import HelpModal from './HelpModal';
 import images from './images';
@@ -123,32 +122,6 @@ function Board(props: BoardProps) {
     shuffleTiles();
   }, []);
 
-  const Box = posed.div({
-    hoverable: true,
-    pressable: true,
-    focusable: true,
-    init: {
-      scale: 1.1,
-      boxShadow: '0px 0px 0px rgba(0,0,0,0)',
-    },
-    hover: {
-      scale: 1,
-      boxShadow: '0px 0px 0px rgba(0,0,0,0)',
-    },
-    press: {
-      scale: 1.2,
-      boxShadow: '0px 0px 0px rgba(0,0,0,0)',
-    },
-    focus: { scale: 1.2 },
-    blur: {
-      scale: 1,
-      transition: {
-        type: 'spring',
-        stiffness: 800,
-      },
-    },
-  });
-
   return (
     <>
       <ul
@@ -174,30 +147,21 @@ function Board(props: BoardProps) {
         ))}
       </ul>
       <div>
-        <Box className='box'>
-          <Button
-            onClick={handleShuffleClick}
-            variant='contained'
-            color='primary'>
-            Mezclar
-          </Button>
-        </Box>
-        <Box className='box'>
-          <Button
-            onClick={nextImageHanlder}
-            variant='contained'
-            color='primary'>
-            Próxima Imagen
-          </Button>
-        </Box>
+        <Button
+          onClick={handleShuffleClick}
+          variant='contained'
+          color='primary'>
+          Mezclar
+        </Button>
+        <Button onClick={nextImageHanlder} variant='contained' color='primary'>
+          Próxima Imagen
+        </Button>
         <VerImagen imgUrl={imgUrl} />
       </div>
       <div>
-        <Box className='box'>
-          <Button onClick={onStart} variant='contained' color='primary'>
-            Abandonar
-          </Button>
-        </Box>
+        <Button onClick={onStart} variant='contained' color='primary'>
+          Abandonar
+        </Button>
         <HelpModal />
       </div>
     </>

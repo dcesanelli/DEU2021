@@ -4,7 +4,6 @@ import Modal from '@material-ui/core/Modal';
 import { Button } from '@material-ui/core';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import posed from 'react-pose';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -39,39 +38,11 @@ export default function VerImagen(props: VerImagenProps) {
     setOpen(false);
   };
 
-  const Box = posed.div({
-    hoverable: true,
-    pressable: true,
-    focusable: true,
-    init: {
-      scale: 1.1,
-      boxShadow: '0px 0px 0px rgba(0,0,0,0)',
-    },
-    hover: {
-      scale: 1,
-      boxShadow: '0px 0px 0px rgba(0,0,0,0)',
-    },
-    press: {
-      scale: 1.2,
-      boxShadow: '0px 0px 0px rgba(0,0,0,0)',
-    },
-    focus: { scale: 1.2 },
-    blur: {
-      scale: 1,
-      transition: {
-        type: 'spring',
-        stiffness: 800,
-      },
-    },
-  });
-
   return (
     <div>
-      <Box className='box'>
-        <Button color='primary' variant='contained' onClick={handleOpen}>
-          Ver Imagen
-        </Button>
-      </Box>
+      <Button onClick={handleOpen} variant='contained' color='primary'>
+        Ver Imagen
+      </Button>
       <Modal
         aria-labelledby='transition-modal-title'
         aria-describedby='transition-modal-description'

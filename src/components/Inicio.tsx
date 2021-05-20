@@ -1,10 +1,8 @@
+import React from 'react';
 import { useHistory } from 'react-router-dom';
-import Typography from '@material-ui/core/Typography';
-import Switches from './Switches';
-import HelpModal from './HelpModal';
-import MotionButton from './MotionButton';
-import {  CSSProperties } from 'react';
+import { CSSProperties } from 'react';
 import { Button } from '@material-ui/core';
+import Switch from 'react-switch';
 
 type InicioProps = {
   showNumbers: boolean;
@@ -31,65 +29,77 @@ function Inicio(props: InicioProps) {
   return (
     <>
       <div style={{}}>
-        
         <div style={containerApp}>
-          <Typography
-            style={{ textAlign: 'center' }}
-            variant='h3'
-            component='h3'
-            gutterBottom>
-            Dificultad
-          </Typography>
-          <MotionButton
+          <div style={{ textAlign: 'center' }}>Dificultad</div>
+          <Button
             onClick={() => history.push('/juego/facil')}
-            texto='Facil'
-          />
-          <MotionButton
+            variant='contained'
+            color='primary'>
+            Facil
+          </Button>
+          <Button
             onClick={() => history.push('/juego/medio')}
-            texto='Medio'
-          />
-          <MotionButton
+            variant='contained'
+            color='primary'>
+            Medio
+          </Button>
+          <Button
             onClick={() => history.push('/juego/dificil')}
-            texto='Dificil'
-          />
+            variant='contained'
+            color='primary'>
+            Dificil
+          </Button>
         </div>
-        <Switches onChange={onSwitchChange} value={showNumbers} />
+        <div style={{ marginTop: '10%', textAlign: 'center' }}>
+          <div style={{ textAlign: 'center' }}>Mostrar numeros</div>
+          <Switch onChange={onSwitchChange} checked={showNumbers} />
+        </div>
+
         <div>
-          <Typography
-            style={{ marginTop: '10%', textAlign: 'center' }}
-            variant='h3'
-            component='h3'
-            gutterBottom>
-            Tamaño
-          </Typography>
+          <div style={{ marginTop: '10%', textAlign: 'center' }}>Tamaño</div>
           <div
             style={{
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'space-between',
             }}>
-            <MotionButton onClick={() => changeSize(120)} texto='Pequeño' />
-            <MotionButton onClick={() => changeSize(240)} texto='Medio' />
-            <MotionButton onClick={() => changeSize(480)} texto='Grande' />
+            <Button
+              onClick={() => changeSize(120)}
+              variant='contained'
+              color='primary'>
+              Pequeño
+            </Button>
+            <Button
+              onClick={() => changeSize(240)}
+              variant='contained'
+              color='primary'>
+              Medio
+            </Button>
+            <Button
+              onClick={() => changeSize(480)}
+              variant='contained'
+              color='primary'>
+              Grande
+            </Button>
           </div>
         </div>
         <div>
-          <Typography
-            style={{ marginTop: '10%', textAlign: 'center' }}
-            variant='h3'
-            component='h3'
-            gutterBottom>
-            Contraste
-          </Typography>
+          <div style={{ marginTop: '10%', textAlign: 'center' }}>Contraste</div>
           <div
             style={{
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'space-between',
             }}>
-            <MotionButton onClick={() => changeSize(120)} texto='Bajo' />
-            <MotionButton onClick={() => changeSize(240)} texto='Medio' />
-            <MotionButton onClick={() => changeSize(480)} texto='Alto' />
+            <Button variant='contained' color='primary'>
+              Bajo
+            </Button>
+            <Button variant='contained' color='primary'>
+              Medio
+            </Button>
+            <Button variant='contained' color='primary'>
+              Alto
+            </Button>
           </div>
         </div>
         <div>

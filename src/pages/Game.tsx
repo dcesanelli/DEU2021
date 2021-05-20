@@ -1,6 +1,5 @@
 import React, { useEffect, useState, CSSProperties } from 'react';
 import { useLocation } from 'react-router-dom';
-import Typography from '@material-ui/core/Typography';
 import Board from '../components/Board';
 import Inicio from '../components/Inicio';
 
@@ -52,18 +51,15 @@ function Game() {
 
   return (
     <>
-      <Typography
+      <div
         style={{
           textAlign: 'center',
           marginTop: '10px',
           fontFamily: 'gameria',
-          color:'#feffde'
-        }}
-        variant='h2'
-        component='h2'
-        gutterBottom>
+          color: '#feffde',
+        }}>
         Citadine Puzzle
-      </Typography>
+      </div>
       <div style={containerApp}>
         {!isStarted ? (
           <Inicio
