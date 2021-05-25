@@ -1,7 +1,8 @@
-import React from 'react';
+import HelpModal from './HelpModal';
 import { useHistory } from 'react-router-dom';
 import { CSSProperties } from 'react';
 import { Button } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider';
 import Switch from 'react-switch';
 
 type InicioProps = {
@@ -11,16 +12,36 @@ type InicioProps = {
   onStart: () => void;
 };
 
-const containerApp: CSSProperties = {
-  margin: '1% 3%',
-  padding: '2% 0%',
+const inicioCSS: CSSProperties = {
+  textAlign: 'center',
+  padding: '1%',
+  margin: '3% 32%',
+  borderRadius:'8px',
+  fontFamily: 'gameria',
+  opacity:'0.95',
   backgroundColor: '#a3d2ca',
-  borderRadius: '15px',
+};
+
+const itemConfigCSS: CSSProperties = {
+  textAlign: 'center',
+  padding: '2%',
+  margin: '3% 3%',
+  borderRadius:'8px',
+  fontFamily: 'gameria',
+  backgroundColor: '#e7d4b5',
+};
+
+const buttonGroupCSS: CSSProperties = {
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
-  paddingInline: '5%',
-  marginInline: '6%',
+  marginTop:'2%'
+};
+
+const buttonCSS: CSSProperties = {
+  fontSize: '1.3em',
+  fontFamily: 'gameria',
+  backgroundColor:'#ca8a8b'
 };
 
 function Inicio(props: InicioProps) {
@@ -28,82 +49,81 @@ function Inicio(props: InicioProps) {
   const { showNumbers, onSwitchChange, changeSize, onStart } = props;
   return (
     <>
-      <div style={{}}>
-        <div style={containerApp}>
-          <div style={{ textAlign: 'center' }}>Dificultad</div>
-          <Button
-            onClick={() => history.push('/juego/facil')}
-            variant='contained'
-            color='primary'>
-            Facil
-          </Button>
-          <Button
-            onClick={() => history.push('/juego/medio')}
-            variant='contained'
-            color='primary'>
-            Medio
-          </Button>
-          <Button
-            onClick={() => history.push('/juego/dificil')}
-            variant='contained'
-            color='primary'>
-            Dificil
-          </Button>
-        </div>
-        <div style={{ marginTop: '10%', textAlign: 'center' }}>
-          <div style={{ textAlign: 'center' }}>Mostrar numeros</div>
+      <div style={inicioCSS}>
+          <div style={{ paddingBottom:'6px'}}> <HelpModal fontSize={'1.2em'}/> </div>
+          <Divider
+            style={{ marginInline: '15%', backgroundColor: 'black',marginBottom:'1px' }}
+            variant='middle'
+          />
+          
+          
+          <div style={itemConfigCSS}>
+              <div style={{ textAlign: 'center',marginTop:'5px',fontSize: '1.9em' }}>Dificultad</div>
+              <div style={buttonGroupCSS}>
+                <Button
+                  onClick={() => history.push('/juego/facil')}
+                  variant='contained'
+                  style={buttonCSS}>
+                  Facil
+                </Button>
+                <Button
+                  onClick={() => history.push('/juego/medio')}
+                  variant='contained'
+                  style={buttonCSS}>
+                  Medio
+                </Button>
+                <Button
+                  onClick={() => history.push('/juego/dificil')}
+                  variant='contained'
+                  style={buttonCSS}>
+                  Dificil
+                </Button>
+              </div>  
+          </div>
+        <div style={itemConfigCSS}>
+          <div style={{ textAlign: 'center' ,fontSize: '1.9em'}}>Mostrar numeros</div>
           <Switch onChange={onSwitchChange} checked={showNumbers} />
         </div>
 
-        <div>
-          <div style={{ marginTop: '10%', textAlign: 'center' }}>Tamaño</div>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
+        <div style={itemConfigCSS}>
+          <div style={{fontSize: '1.9em' }}>Tamaño</div>
+          <div style={buttonGroupCSS}>
             <Button
               onClick={() => changeSize(120)}
               variant='contained'
-              color='primary'>
-              Pequeño
+              style={buttonCSS}>
+              Chico
             </Button>
             <Button
               onClick={() => changeSize(240)}
               variant='contained'
-              color='primary'>
+              style={buttonCSS}>
               Medio
             </Button>
             <Button
               onClick={() => changeSize(480)}
               variant='contained'
-              color='primary'>
+              style={buttonCSS}>
               Grande
             </Button>
           </div>
         </div>
-        <div>
-          <div style={{ marginTop: '10%', textAlign: 'center' }}>Contraste</div>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
-            <Button variant='contained' color='primary'>
+        <div style={itemConfigCSS}>
+          <div style={{  textAlign: 'center',fontSize: '1.9em' }}>Contraste</div>
+          <div style={buttonGroupCSS}>
+          <Button variant='contained'  style={buttonCSS}>
               Bajo
             </Button>
-            <Button variant='contained' color='primary'>
+            <Button variant='contained'  style={buttonCSS}>
               Medio
             </Button>
-            <Button variant='contained' color='primary'>
+            <Button variant='contained'  style={buttonCSS}>
               Alto
             </Button>
           </div>
         </div>
         <div>
-          <Button onClick={onStart} variant='contained' color='primary'>
+          <Button onClick={onStart} variant='contained' style={{ marginTop: '3%', backgroundColor:'#81b214', textAlign: 'center',fontSize: '1.8em',fontFamily: 'gameria', }}>
             Comenzar
           </Button>
         </div>

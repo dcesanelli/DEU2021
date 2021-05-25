@@ -40,7 +40,7 @@ export default function VerImagen(props: VerImagenProps) {
 
   return (
     <div>
-      <Button onClick={handleOpen} variant='contained' color='primary'>
+      <Button onClick={handleOpen} variant='contained' color='primary' style={{ fontSize: '2.3em',fontFamily: 'gameria' }}>
         Ver Imagen
       </Button>
       <Modal
@@ -55,8 +55,8 @@ export default function VerImagen(props: VerImagenProps) {
           timeout: 500,
         }}>
         <Fade in={open}>
-          <div className={classes.paper}>
-            <img src={imgUrl} alt='Imagen resuelta' />
+          <div className={classes.paper} >
+            <img src={imgUrl} alt='Imagen resuelta' style={{ width: '400px'}} />
           </div>
         </Fade>
       </Modal>

@@ -1,11 +1,13 @@
 import { Button } from '@material-ui/core';
 import React, { useEffect } from 'react';
-import { useState } from 'react';
+import Divider from '@material-ui/core/Divider';
+import { useState, CSSProperties } from 'react';
 import { useHistory } from 'react-router-dom';
 import HelpModal from './HelpModal';
 import images from './images';
 import Tile from './Tile';
 import VerImagen from './VerImagen';
+
 type BoardProps = {
   boardSize: number;
   gridSize: number;
@@ -13,6 +15,33 @@ type BoardProps = {
   isStarted: boolean;
   onStart: () => void;
 };
+
+const boardCSS: CSSProperties = {
+  textAlign: 'center',
+  padding: '2%',
+  margin: '2% 32%',
+  borderRadius:'8px',
+  fontFamily: 'gameria',
+  backgroundColor: '#a3d2ca',
+};
+
+const actionsImageCSS: CSSProperties = {
+  display:'flex',
+  flexDirection:'row',
+  justifyContent:'space-between',
+  padding: '1%',
+  margin: '2%',
+  fontFamily: 'gameria',
+  backgroundColor: '#a3d2ca',
+  fontSize: '0.4em'
+};
+
+const buttonCSS: CSSProperties = {
+  fontSize: '1.4em',
+  fontFamily: 'gameria',
+  backgroundColor:'#ff8303'
+};
+
 function Board(props: BoardProps) {
   const { boardSize, gridSize, showNumbers, isStarted, onStart } = props;
   const [tiles, setTiles] = useState([...Array(gridSize * gridSize).keys()]);
@@ -124,45 +153,53 @@ function Board(props: BoardProps) {
 
   return (
     <>
-      <ul
-        style={{
-          width: boardSize,
-          height: boardSize,
-        }}
-        className='board'>
-        {tiles.map((tile, index) => (
-          <Tile
-            key={tile}
-            index={index}
-            imgUrl={imgUrl}
-            tile={tile}
-            width={pieceSize}
-            height={pieceSize}
-            handleTileClick={handleTileClick}
-            boardSize={boardSize}
-            gridSize={gridSize}
-            showNumbers={showNumbers}
-            isSolved={isStarted && isSolved(tiles)}
+      <div style={boardCSS}>
+        <ul
+          style={{
+            width: boardSize,
+            height: boardSize,
+          }}
+          className='board'>
+          {tiles.map((tile, index) => (
+            <Tile
+              key={tile}
+              index={index}
+              imgUrl={imgUrl}
+              tile={tile}
+              width={pieceSize}
+              height={pieceSize}
+              handleTileClick={handleTileClick}
+              boardSize={boardSize}
+              gridSize={gridSize}
+              showNumbers={showNumbers}
+              isSolved={isStarted && isSolved(tiles)}
+            />
+          ))}
+        </ul>
+        <div style={actionsImageCSS}>
+          <Button
+            onClick={handleShuffleClick}
+            variant='contained'
+            style={{ fontSize: '2.3em',fontFamily: 'gameria' }}
+            color='primary'>
+            Mezclar
+          </Button>
+          <Button onClick={nextImageHanlder} variant='contained' style={{ fontSize: '2.3em',fontFamily: 'gameria' }} color='primary'>
+            Próxima Imagen
+          </Button>
+          <VerImagen imgUrl={imgUrl} />
+        </div>
+        <Divider
+            style={{ marginInline: '10%',  backgroundColor: 'black',marginBottom:'5%' }}
+            variant='middle'
           />
-        ))}
-      </ul>
-      <div>
-        <Button
-          onClick={handleShuffleClick}
-          variant='contained'
-          color='primary'>
-          Mezclar
-        </Button>
-        <Button onClick={nextImageHanlder} variant='contained' color='primary'>
-          Próxima Imagen
-        </Button>
-        <VerImagen imgUrl={imgUrl} />
-      </div>
-      <div>
-        <Button onClick={onStart} variant='contained' color='primary'>
-          Abandonar
-        </Button>
-        <HelpModal />
+        <div style={actionsImageCSS}>
+          <Button onClick={() => history.push('/')} variant='contained' color='primary' style={{ backgroundColor: 'red', fontSize: '2.3em',fontFamily: 'gameria' }}>
+            Salir
+          </Button>
+          <HelpModal fontSize={'2.3em'}/>
+          
+        </div>
       </div>
     </>
   );

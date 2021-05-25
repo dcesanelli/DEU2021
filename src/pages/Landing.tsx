@@ -1,48 +1,58 @@
-import React from 'react';
+import { CSSProperties } from 'react';
 import Divider from '@material-ui/core/Divider';
 import { Button } from '@material-ui/core';
+
+const landingCSS: CSSProperties = {
+  textAlign: 'center',
+  padding: '2%',
+  margin: '11% 32%',
+  borderRadius:'8px',
+  fontFamily: 'gameria',
+  opacity:'0.9',
+  backgroundColor: '#a3d2ca',
+};
+
 
 function Landing() {
   return (
     <>
-      <div
-        style={{
-          textAlign: 'center',
-          marginTop: '10px',
-          fontFamily: 'gameria',
-          color: '#feffde',
-        }}>
-        Citadine Puzzle
+      <div style={landingCSS}>
+        <div style={{  fontSize: '3em'}}>
+          Citadine Puzzle
+        </div>
+        <Divider
+          style={{ marginInline: '15%', backgroundColor: 'black' }}
+          variant='middle'
+        />
+        <p
+          style={{
+            marginTop: '20px',
+            fontSize: '2em',
+          }}>
+          Bienvenidos a citadine puzzle!
+        </p>
+        <p
+          style={{
+            marginTop: '10px',
+            fontSize: '1.5em',
+          }}>
+          Diviertase resolviendo puzzles
+          <br />
+          aprendiendo de sustentatibilidad.
+          <br /><br />
+          Ordene las imagenes 
+
+          para recibir valiosas recompensas.
+        </p>
+        <Button href='/juego' variant='contained' style={{
+            marginTop: '10px',
+            fontFamily: 'gameria',
+            fontSize: '1.8em',
+            backgroundColor:'#81b214'
+          }}>
+          Continuar
+        </Button>
       </div>
-      <Divider
-        style={{ marginInline: '15%', backgroundColor: 'faf2da' }}
-        variant='middle'
-      />
-      <p
-        style={{
-          textAlign: 'center',
-          marginTop: '20px',
-          fontFamily: 'gameria',
-          fontSize: '2em',
-          color: '#feffde',
-        }}>
-        Bienvenidos a citadine puzzle!
-      </p>
-      <p
-        style={{
-          textAlign: 'center',
-          marginTop: '10px',
-          fontFamily: 'gameria',
-          fontSize: '1.5em',
-          color: '#feffde',
-        }}>
-        Diviertase haciendo puzzles
-        <br />
-        aprendiendo de sustentatibilidad.
-      </p>
-      <Button href='/juego' variant='contained' color='primary'>
-        Continuar
-      </Button>
     </>
   );
 }

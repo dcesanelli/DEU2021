@@ -1,4 +1,4 @@
-import React, { useEffect, useState, CSSProperties } from 'react';
+import  { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Board from '../components/Board';
 import Inicio from '../components/Inicio';
@@ -29,18 +29,6 @@ function Game() {
     }
   }, [location.pathname]);
 
-  const containerApp: CSSProperties = {
-    margin: '1% 3%',
-    padding: '2% 0%',
-    backgroundColor: '#a3d2ca',
-    borderRadius: '15px',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingInline: '5%',
-    marginInline: '6%',
-  };
-
   const onStartHandler = () => {
     setIsStarted(true);
   };
@@ -51,16 +39,7 @@ function Game() {
 
   return (
     <>
-      <div
-        style={{
-          textAlign: 'center',
-          marginTop: '10px',
-          fontFamily: 'gameria',
-          color: '#feffde',
-        }}>
-        Citadine Puzzle
-      </div>
-      <div style={containerApp}>
+      <div>
         {!isStarted ? (
           <Inicio
             onSwitchChange={showNumbersHandler}

@@ -6,6 +6,10 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import HelpOutlineTwoToneIcon from '@material-ui/icons/HelpOutlineTwoTone';
 
+type HelpModalProps = {
+  fontSize: string;
+};
+
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
@@ -22,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function HelpModal() {
+export default function HelpModal(props: HelpModalProps) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -36,7 +40,7 @@ export default function HelpModal() {
 
   return (
     <div>
-      <Button onClick={handleOpen} variant='contained' color='secondary'>
+      <Button onClick={handleOpen} variant='contained' style={{  backgroundColor: '#fea82f',fontFamily: 'gameria',fontSize: props.fontSize, }}>
         Como se juega <HelpOutlineTwoToneIcon />
       </Button>
       <Modal
