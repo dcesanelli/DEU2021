@@ -1,5 +1,5 @@
 import { Button } from '@material-ui/core';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import Divider from '@material-ui/core/Divider';
 import { useState, CSSProperties } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -20,30 +20,24 @@ const boardCSS: CSSProperties = {
   textAlign: 'center',
   padding: '2%',
   margin: '2% 32%',
-  borderRadius:'8px',
+  borderRadius: '8px',
   fontFamily: 'gameria',
   backgroundColor: '#a3d2ca',
 };
 
 const actionsImageCSS: CSSProperties = {
-  display:'flex',
-  flexDirection:'row',
-  justifyContent:'space-between',
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
   padding: '1%',
   margin: '2%',
   fontFamily: 'gameria',
   backgroundColor: '#a3d2ca',
-  fontSize: '0.4em'
-};
-
-const buttonCSS: CSSProperties = {
-  fontSize: '1.4em',
-  fontFamily: 'gameria',
-  backgroundColor:'#ff8303'
+  fontSize: '0.4em',
 };
 
 function Board(props: BoardProps) {
-  const { boardSize, gridSize, showNumbers, isStarted, onStart } = props;
+  const { boardSize, gridSize, showNumbers, isStarted } = props;
   const [tiles, setTiles] = useState([...Array(gridSize * gridSize).keys()]);
   const [pieceSize, setPieceSize] = useState(Math.round(boardSize / gridSize));
   const [imageIndex, setImageIndex] = useState(1);
@@ -149,8 +143,9 @@ function Board(props: BoardProps) {
     setTiles([...Array(gridSize * gridSize).keys()]);
   }, [boardSize, gridSize]);
 
-  useEffect(() => {
+  useCallback(() => {
     shuffleTiles();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -182,25 +177,40 @@ function Board(props: BoardProps) {
           <Button
             onClick={handleShuffleClick}
             variant='contained'
-            style={{ fontSize: '2.3em',fontFamily: 'gameria' }}
+            style={{ fontSize: '2.3em', fontFamily: 'gameria' }}
             color='primary'>
             Mezclar
           </Button>
-          <Button onClick={nextImageHanlder} variant='contained' style={{ fontSize: '2.3em',fontFamily: 'gameria' }} color='primary'>
+          <Button
+            onClick={nextImageHanlder}
+            variant='contained'
+            style={{ fontSize: '2.3em', fontFamily: 'gameria' }}
+            color='primary'>
             Próxima Imagen
           </Button>
           <VerImagen imgUrl={imgUrl} />
         </div>
         <Divider
-            style={{ marginInline: '10%',  backgroundColor: 'black',marginBottom:'5%' }}
-            variant='middle'
-          />
+          style={{
+            marginInline: '10%',
+            backgroundColor: 'black',
+            marginBottom: '5%',
+          }}
+          variant='middle'
+        />
         <div style={actionsImageCSS}>
-          <Button onClick={() => history.push('/')} variant='contained' color='primary' style={{ backgroundColor: 'red', fontSize: '2.3em',fontFamily: 'gameria' }}>
+          <Button
+            onClick={() => history.push('/')}
+            variant='contained'
+            color='primary'
+            style={{
+              backgroundColor: 'red',
+              fontSize: '2.3em',
+              fontFamily: 'gameria',
+            }}>
             Salir
           </Button>
-          <HelpModal fontSize={'2.3em'}/>
-          
+          <HelpModal fontSize={'2.3em'} />
         </div>
       </div>
     </>
