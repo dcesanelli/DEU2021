@@ -46,18 +46,20 @@ function Board(props: BoardProps) {
   const { boardSize, gridSize, showNumbers, isStarted, onStart } = props;
   const [tiles, setTiles] = useState([...Array(gridSize * gridSize).keys()]);
   const [pieceSize, setPieceSize] = useState(Math.round(boardSize / gridSize));
-  const [imgUrl, setImgUrl] = useState('');
   const [imageIndex, setImageIndex] = useState(1);
+  const [imgUrl, setImgUrl] = useState(images[imageIndex].image);
   const history = useHistory();
 
   const nextImageHanlder = () => {
     if (imageIndex === images.length - 1) {
-      setImageIndex(0);
+      setImageIndex(1);
+      setImgUrl(images[1].image);
     } else {
       setImageIndex(imageIndex + 1);
+      setImgUrl(images[imageIndex + 1].image);
     }
 
-    setImgUrl(images[imageIndex].image);
+    
   };
 
   function isSolvable(tiles: number[]) {

@@ -9,10 +9,12 @@ function Game() {
   const [boardSize, setBoardSize] = useState(320);
   const [showNumbers, setShowNumbers] = useState(true);
   const [isStarted, setIsStarted] = useState(false);
+  const [dificultad, setDificultad] = useState('facil');
+  const [contraste, setContraste] = useState('medio');
 
   useEffect(() => {
     setBoardSize(480);
-    switch (location.pathname.substr(7)) {
+    switch (dificultad) {
       case 'facil':
         setGridSize(2);
         break;
@@ -27,7 +29,7 @@ function Game() {
         setGridSize(3);
         break;
     }
-  }, [location.pathname]);
+  }, [dificultad]);
 
   const onStartHandler = () => {
     setIsStarted(true);
@@ -37,6 +39,15 @@ function Game() {
     setShowNumbers(!showNumbers);
   };
 
+  const dificultadHandler = (item:string) => {
+    setDificultad(item);
+  };
+
+  const contrasteHandler = (item:string) => {
+    setContraste(item);
+  };
+  
+
   return (
     <>
       <div>
@@ -44,6 +55,10 @@ function Game() {
           <Inicio
             onSwitchChange={showNumbersHandler}
             showNumbers={showNumbers}
+            dificultad={dificultad}
+            changeDificultad={dificultadHandler}
+            contraste={contraste}
+            changeContraste={contrasteHandler}
             changeSize={setBoardSize}
             onStart={onStartHandler}
           />

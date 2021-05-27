@@ -50,11 +50,11 @@ function Congrats() {
        />
     </div>
     <div style={actionsButtonsCSS}>
-          <Button onClick={() => history.push('/')} variant='contained' color='primary' style={{ backgroundColor: 'red', fontSize: '2.8em',fontFamily: 'gameria' }}>
+          <Button onClick={() => history.push('/')} variant='contained'  color='primary' style={{ backgroundColor: 'red', fontSize: '2.8em',fontFamily: 'gameria' }}>
             Salir
           </Button>
 
-          <Button onClick={() => history.push('/')} variant='contained' color='primary' style={{ backgroundColor: 'green', fontSize: '2.8em',fontFamily: 'gameria' }}>
+          <Button onClick={() => history.push('/juego')} variant='contained' color='primary' style={{ backgroundColor: 'green', fontSize: '2.8em',fontFamily: 'gameria' }}>
             Volver a jugar
           </Button>
           

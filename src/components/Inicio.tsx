@@ -7,8 +7,12 @@ import Switch from 'react-switch';
 
 type InicioProps = {
   showNumbers: boolean;
+  dificultad: string;
+  contraste: string;
   onSwitchChange: () => void;
   changeSize: (size: number) => void;
+  changeDificultad: (item:string) => void;
+  changeContraste: (item:string) => void;
   onStart: () => void;
 };
 
@@ -44,9 +48,19 @@ const buttonCSS: CSSProperties = {
   backgroundColor:'#ca8a8b'
 };
 
+
 function Inicio(props: InicioProps) {
   const history = useHistory();
-  const { showNumbers, onSwitchChange, changeSize, onStart } = props;
+  const { showNumbers, onSwitchChange, changeSize, onStart,dificultad,changeDificultad,contraste,changeContraste } = props;
+
+  const onChangeDificultad = (selected:string) => {
+    changeDificultad(selected);
+  };
+
+  const onChangeContraste = (selected:string) => {
+    changeContraste(selected);
+  };
+  
   return (
     <>
       <div style={inicioCSS}>
@@ -61,20 +75,23 @@ function Inicio(props: InicioProps) {
               <div style={{ textAlign: 'center',marginTop:'5px',fontSize: '1.9em' }}>Dificultad</div>
               <div style={buttonGroupCSS}>
                 <Button
-                  onClick={() => history.push('/juego/facil')}
+                  onClick={() => onChangeDificultad('facil')}
                   variant='contained'
+                  disabled={dificultad == 'facil'}
                   style={buttonCSS}>
                   Facil
                 </Button>
                 <Button
-                  onClick={() => history.push('/juego/medio')}
+                  onClick={() => onChangeDificultad('medio')}
                   variant='contained'
+                  disabled={dificultad == 'medio'}
                   style={buttonCSS}>
                   Medio
                 </Button>
                 <Button
-                  onClick={() => history.push('/juego/dificil')}
+                  onClick={() => onChangeDificultad('dificil')}
                   variant='contained'
+                  disabled={dificultad == 'dificil'}
                   style={buttonCSS}>
                   Dificil
                 </Button>
@@ -111,13 +128,25 @@ function Inicio(props: InicioProps) {
         <div style={itemConfigCSS}>
           <div style={{  textAlign: 'center',fontSize: '1.9em' }}>Contraste</div>
           <div style={buttonGroupCSS}>
-          <Button variant='contained'  style={buttonCSS}>
+            <Button
+              onClick={() => onChangeContraste('bajo')} 
+              variant='contained'
+              style={buttonCSS}
+              disabled={contraste == 'bajo'}>
               Bajo
             </Button>
-            <Button variant='contained'  style={buttonCSS}>
+            <Button
+              onClick={() => onChangeContraste('medio')} 
+              variant='contained'
+              style={buttonCSS}
+              disabled={contraste == 'medio'}>
               Medio
             </Button>
-            <Button variant='contained'  style={buttonCSS}>
+            <Button
+              onClick={() => onChangeContraste('alto')} 
+              variant='contained'
+              style={buttonCSS}
+              disabled={contraste == 'alto'}>
               Alto
             </Button>
           </div>
