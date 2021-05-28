@@ -1,10 +1,8 @@
-import  { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import Board from '../components/Board';
 import Inicio from '../components/Inicio';
 
 function Game() {
-  const location = useLocation();
   const [gridSize, setGridSize] = useState(4);
   const [boardSize, setBoardSize] = useState(320);
   const [showNumbers, setShowNumbers] = useState(true);
@@ -39,14 +37,13 @@ function Game() {
     setShowNumbers(!showNumbers);
   };
 
-  const dificultadHandler = (item:string) => {
+  const dificultadHandler = (item: string) => {
     setDificultad(item);
   };
 
-  const contrasteHandler = (item:string) => {
+  const contrasteHandler = (item: string) => {
     setContraste(item);
   };
-  
 
   return (
     <>
