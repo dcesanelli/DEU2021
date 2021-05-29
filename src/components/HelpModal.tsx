@@ -40,7 +40,14 @@ export default function HelpModal(props: HelpModalProps) {
 
   return (
     <div>
-      <Button onClick={handleOpen} variant='contained' style={{  backgroundColor: '#fea82f',fontFamily: 'gameria',fontSize: props.fontSize, }}>
+      <Button
+        onClick={handleOpen}
+        variant='contained'
+        style={{
+          backgroundColor: '#fea82f',
+          fontFamily: 'gameria',
+          fontSize: props.fontSize,
+        }}>
         Como se juega <HelpOutlineTwoToneIcon />
       </Button>
       <Modal
@@ -56,25 +63,25 @@ export default function HelpModal(props: HelpModalProps) {
         }}>
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 id='transition-modal-title'>Carga</h2>
+            <h2 id='transition-modal-title' style={{ textAlign: 'center' }}>
+              Bienvenido al Citadine Puzzle
+            </h2>
             <p id='transition-modal-description'>
-              1. Crea una carpeta para la tarea con formato Ej: T-5341
+              1. Las piezas se moverán haciendo "click" sobre cada una de ellas.
             </p>
             <p id='transition-modal-description'>
-              2. Guarda los scripts con el prefijo Ej: 01_*.sql acorde al orden
-              de ejecuccion
-            </p>
-            <h2 id='transition-modal-title'>Actualizacion</h2>
-            <p id='transition-modal-description'>
-              1. Al ejecutar cada script es actualizado en cada una de las DB
-              seteadas
+              2. Para desordenar el rompecabezas presioná "Mezclar"
             </p>
             <p id='transition-modal-description'>
-              2. Si algun script falla el mismo retorna la DB y su error
+              3. Para cambiar a la siguiente imagen presioná "Próxima Imagen".
             </p>
             <p id='transition-modal-description'>
-              3. En el log se pueden ver las ejecuciones fallidas en detalle
+              4. Presiona el botón "Ver Imagen" para ver la imagen que deberás
+              armar.
             </p>
+            <h2 id='transition-modal-title' style={{ textAlign: 'center' }}>
+              BUENA SUERTE!!!
+            </h2>
           </div>
         </Fade>
       </Modal>

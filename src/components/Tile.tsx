@@ -53,7 +53,10 @@ function Tile(props: TileProps) {
   };
   const numberStyle = {
     color: 'white',
-    // ToDO: meter circulito gris opaco para que haga contraste con cualquier color
+    background: 'gray',
+    padding: '5px 10px',
+    borderRadius: '15px',
+    textAlign: 'center' as const,
   };
   return (
     <Motion style={motionStyle}>

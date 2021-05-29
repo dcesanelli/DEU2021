@@ -11,7 +11,7 @@ function Game() {
   const [isFinished, setIsFinished] = useState(false);
   const [dificultad, setDificultad] = useState('facil');
   const [contraste, setContraste] = useState('medio');
-  const [imageIndex, setImageIndex] = useState(1);
+  const [imageIndex, setImageIndex] = useState(0);
   const [imgUrl, setImgUrl] = useState(images[imageIndex].image);
 
   useEffect(() => {
@@ -49,8 +49,8 @@ function Game() {
   };
   const nextImageHanlder = () => {
     if (imageIndex === images.length - 1) {
-      setImageIndex(1);
-      setImgUrl(images[1].image);
+      setImageIndex(0);
+      setImgUrl(images[0].image);
     } else {
       setImageIndex(imageIndex + 1);
       setImgUrl(images[imageIndex + 1].image);
@@ -87,6 +87,7 @@ function Game() {
               gridSize={gridSize}
               showNumbers={showNumbers}
               setIsFinished={setIsFinished}
+              imageIndex={imageIndex}
             />
           )
         ) : (

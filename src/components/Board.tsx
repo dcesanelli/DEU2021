@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import HelpModal from './HelpModal';
 import Tile from './Tile';
 import VerImagen from './VerImagen';
+import images from './images';
 
 type BoardProps = {
   boardSize: number;
@@ -16,6 +17,7 @@ type BoardProps = {
   imgUrl: string;
   nextImageHanlder: () => void;
   setIsFinished: (isFinished: boolean) => void;
+  imageIndex: number;
 };
 
 const boardCSS: CSSProperties = {
@@ -47,6 +49,7 @@ function Board(props: BoardProps) {
     imgUrl,
     nextImageHanlder,
     setIsFinished,
+    imageIndex,
   } = props;
   const [tiles, setTiles] = useState([...Array(gridSize * gridSize).keys()]);
   const [pieceSize, setPieceSize] = useState(Math.round(boardSize / gridSize));
@@ -147,28 +150,39 @@ function Board(props: BoardProps) {
   return (
     <>
       <div style={boardCSS}>
-        <ul
+        <h1>{images[imageIndex].name}</h1>
+        <Divider
           style={{
-            width: boardSize,
-            height: boardSize,
+            marginInline: '10%',
+            backgroundColor: 'black',
+            marginBottom: '5%',
           }}
-          className='board'>
-          {tiles.map((tile, index) => (
-            <Tile
-              key={tile}
-              index={index}
-              imgUrl={imgUrl}
-              tile={tile}
-              width={pieceSize}
-              height={pieceSize}
-              handleTileClick={handleTileClick}
-              boardSize={boardSize}
-              gridSize={gridSize}
-              showNumbers={showNumbers}
-              isSolved={isStarted && isSolved(tiles)}
-            />
-          ))}
-        </ul>
+          variant='middle'
+        />
+        <div>
+          <ul
+            style={{
+              width: boardSize,
+              height: boardSize,
+            }}
+            className='board'>
+            {tiles.map((tile, index) => (
+              <Tile
+                key={tile}
+                index={index}
+                imgUrl={imgUrl}
+                tile={tile}
+                width={pieceSize}
+                height={pieceSize}
+                handleTileClick={handleTileClick}
+                boardSize={boardSize}
+                gridSize={gridSize}
+                showNumbers={showNumbers}
+                isSolved={isStarted && isSolved(tiles)}
+              />
+            ))}
+          </ul>
+        </div>
         <div style={actionsImageCSS}>
           <Button
             onClick={handleShuffleClick}
