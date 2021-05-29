@@ -4,7 +4,6 @@ import Divider from '@material-ui/core/Divider';
 import { useState, CSSProperties } from 'react';
 import { useHistory } from 'react-router-dom';
 import HelpModal from './HelpModal';
-import images from './images';
 import Tile from './Tile';
 import VerImagen from './VerImagen';
 
@@ -14,6 +13,9 @@ type BoardProps = {
   showNumbers: boolean;
   isStarted: boolean;
   onStart: () => void;
+  imgUrl: string;
+  nextImageHanlder: () => void;
+  setIsFinished: (isFinished: boolean) => void;
 };
 
 const boardCSS: CSSProperties = {
@@ -37,24 +39,18 @@ const actionsImageCSS: CSSProperties = {
 };
 
 function Board(props: BoardProps) {
-  const { boardSize, gridSize, showNumbers, isStarted } = props;
+  const {
+    boardSize,
+    gridSize,
+    showNumbers,
+    isStarted,
+    imgUrl,
+    nextImageHanlder,
+    setIsFinished,
+  } = props;
   const [tiles, setTiles] = useState([...Array(gridSize * gridSize).keys()]);
   const [pieceSize, setPieceSize] = useState(Math.round(boardSize / gridSize));
-  const [imageIndex, setImageIndex] = useState(1);
-  const [imgUrl, setImgUrl] = useState(images[imageIndex].image);
   const history = useHistory();
-
-  const nextImageHanlder = () => {
-    if (imageIndex === images.length - 1) {
-      setImageIndex(1);
-      setImgUrl(images[1].image);
-    } else {
-      setImageIndex(imageIndex + 1);
-      setImgUrl(images[imageIndex + 1].image);
-    }
-
-    
-  };
 
   function isSolvable(tiles: number[]) {
     let product = 1;
@@ -125,7 +121,7 @@ function Board(props: BoardProps) {
 
       // Si el juego inició y esta resuelto muestro el texto final
       if (isStarted && isSolved(swappedTiles)) {
-        history.push('/final');
+        setIsFinished(true);
       }
     }
   };

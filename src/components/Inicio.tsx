@@ -1,7 +1,6 @@
 import HelpModal from './HelpModal';
 import { CSSProperties } from 'react';
 import { Button } from '@material-ui/core';
-import Divider from '@material-ui/core/Divider';
 import Switch from 'react-switch';
 
 type InicioProps = {
@@ -9,7 +8,6 @@ type InicioProps = {
   dificultad: string;
   contraste: string;
   onSwitchChange: () => void;
-  changeSize: (size: number) => void;
   changeDificultad: (item: string) => void;
   changeContraste: (item: string) => void;
   onStart: () => void;
@@ -51,7 +49,6 @@ function Inicio(props: InicioProps) {
   const {
     showNumbers,
     onSwitchChange,
-    changeSize,
     onStart,
     dificultad,
     changeDificultad,
@@ -70,19 +67,6 @@ function Inicio(props: InicioProps) {
   return (
     <>
       <div style={inicioCSS}>
-        <div style={{ paddingBottom: '6px' }}>
-          {' '}
-          <HelpModal fontSize={'1.2em'} />{' '}
-        </div>
-        <Divider
-          style={{
-            marginInline: '15%',
-            backgroundColor: 'black',
-            marginBottom: '1px',
-          }}
-          variant='middle'
-        />
-
         <div style={itemConfigCSS}>
           <div
             style={{
@@ -122,30 +106,6 @@ function Inicio(props: InicioProps) {
           </div>
           <Switch onChange={onSwitchChange} checked={showNumbers} />
         </div>
-
-        <div style={itemConfigCSS}>
-          <div style={{ fontSize: '1.9em' }}>Tamaño</div>
-          <div style={buttonGroupCSS}>
-            <Button
-              onClick={() => changeSize(120)}
-              variant='contained'
-              style={buttonCSS}>
-              Chico
-            </Button>
-            <Button
-              onClick={() => changeSize(240)}
-              variant='contained'
-              style={buttonCSS}>
-              Medio
-            </Button>
-            <Button
-              onClick={() => changeSize(480)}
-              variant='contained'
-              style={buttonCSS}>
-              Grande
-            </Button>
-          </div>
-        </div>
         <div style={itemConfigCSS}>
           <div style={{ textAlign: 'center', fontSize: '1.9em' }}>
             Contraste
@@ -175,6 +135,7 @@ function Inicio(props: InicioProps) {
           </div>
         </div>
         <div>
+          <HelpModal fontSize={'1.2em'} />
           <Button
             onClick={onStart}
             variant='contained'

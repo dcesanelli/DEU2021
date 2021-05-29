@@ -1,17 +1,20 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Board from '../components/Board';
+import Congrats from '../components/Congrats';
+import images from '../components/images';
 import Inicio from '../components/Inicio';
 
 function Game() {
   const [gridSize, setGridSize] = useState(4);
-  const [boardSize, setBoardSize] = useState(320);
   const [showNumbers, setShowNumbers] = useState(true);
   const [isStarted, setIsStarted] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
   const [dificultad, setDificultad] = useState('facil');
   const [contraste, setContraste] = useState('medio');
+  const [imageIndex, setImageIndex] = useState(1);
+  const [imgUrl, setImgUrl] = useState(images[imageIndex].image);
 
   useEffect(() => {
-    setBoardSize(480);
     switch (dificultad) {
       case 'facil':
         setGridSize(2);
@@ -44,29 +47,50 @@ function Game() {
   const contrasteHandler = (item: string) => {
     setContraste(item);
   };
+  const nextImageHanlder = () => {
+    if (imageIndex === images.length - 1) {
+      setImageIndex(1);
+      setImgUrl(images[1].image);
+    } else {
+      setImageIndex(imageIndex + 1);
+      setImgUrl(images[imageIndex + 1].image);
+    }
+  };
+
+  const nextPuzzle = () => {
+    setIsFinished(false);
+    nextImageHanlder();
+    setIsStarted(true);
+  };
 
   return (
     <>
       <div>
-        {!isStarted ? (
-          <Inicio
-            onSwitchChange={showNumbersHandler}
-            showNumbers={showNumbers}
-            dificultad={dificultad}
-            changeDificultad={dificultadHandler}
-            contraste={contraste}
-            changeContraste={contrasteHandler}
-            changeSize={setBoardSize}
-            onStart={onStartHandler}
-          />
+        {!isFinished ? (
+          !isStarted ? (
+            <Inicio
+              onSwitchChange={showNumbersHandler}
+              showNumbers={showNumbers}
+              dificultad={dificultad}
+              changeDificultad={dificultadHandler}
+              contraste={contraste}
+              changeContraste={contrasteHandler}
+              onStart={onStartHandler}
+            />
+          ) : (
+            <Board
+              isStarted={isStarted}
+              onStart={onStartHandler}
+              imgUrl={imgUrl}
+              nextImageHanlder={nextImageHanlder}
+              boardSize={320}
+              gridSize={gridSize}
+              showNumbers={showNumbers}
+              setIsFinished={setIsFinished}
+            />
+          )
         ) : (
-          <Board
-            isStarted={isStarted}
-            onStart={onStartHandler}
-            boardSize={boardSize}
-            gridSize={gridSize}
-            showNumbers={showNumbers}
-          />
+          <Congrats nextPuzzle={nextPuzzle} imageIndex={imageIndex} />
         )}
       </div>
     </>
