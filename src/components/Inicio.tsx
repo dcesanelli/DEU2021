@@ -1,3 +1,4 @@
+import Divider from '@material-ui/core/Divider';
 import HelpModal from './HelpModal';
 import { CSSProperties } from 'react';
 import { Button } from '@material-ui/core';
@@ -134,16 +135,27 @@ function Inicio(props: InicioProps) {
             </Button>
           </div>
         </div>
+        <Divider
+          style={{
+            marginInline: '10%',
+            backgroundColor: 'black',
+            height: '2px',
+            marginBottom: '5%',
+            marginTop: '5%',
+          }}
+          variant='middle'
+        />
         <div>
           <HelpModal fontSize={'1.2em'} />
           <Button
             onClick={onStart}
             variant='contained'
             style={{
-              marginTop: '3%',
+              marginTop: '5%',
               backgroundColor: '#81b214',
               textAlign: 'center',
               fontSize: '1.8em',
+              paddingInline:'10%',
               fontFamily: 'gameria',
             }}>
             Comenzar

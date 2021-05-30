@@ -23,7 +23,7 @@ type BoardProps = {
 const boardCSS: CSSProperties = {
   textAlign: 'center',
   padding: '2%',
-  margin: '2% 32%',
+  margin: '1% 32%',
   borderRadius: '8px',
   fontFamily: 'gameria',
   backgroundColor: '#a3d2ca',
@@ -34,7 +34,7 @@ const actionsImageCSS: CSSProperties = {
   flexDirection: 'row',
   justifyContent: 'space-between',
   padding: '1%',
-  margin: '2%',
+  margin: '1%',
   fontFamily: 'gameria',
   backgroundColor: '#a3d2ca',
   fontSize: '0.4em',
@@ -155,7 +155,7 @@ function Board(props: BoardProps) {
           style={{
             marginInline: '10%',
             backgroundColor: 'black',
-            marginBottom: '5%',
+            marginBottom: '3%',
           }}
           variant='middle'
         />
@@ -164,6 +164,8 @@ function Board(props: BoardProps) {
             style={{
               width: boardSize,
               height: boardSize,
+              borderRadius:'5px',
+              border: 'solid white'
             }}
             className='board'>
             {tiles.map((tile, index) => (
@@ -187,14 +189,14 @@ function Board(props: BoardProps) {
           <Button
             onClick={handleShuffleClick}
             variant='contained'
-            style={{ fontSize: '2.3em', fontFamily: 'gameria' }}
+            style={{ fontSize: '2.2em', fontFamily: 'gameria' }}
             color='primary'>
             Mezclar
           </Button>
           <Button
             onClick={nextImageHanlder}
             variant='contained'
-            style={{ fontSize: '2.3em', fontFamily: 'gameria' }}
+            style={{ fontSize: '2.2em', fontFamily: 'gameria' }}
             color='primary'>
             Próxima Imagen
           </Button>
@@ -204,7 +206,9 @@ function Board(props: BoardProps) {
           style={{
             marginInline: '10%',
             backgroundColor: 'black',
-            marginBottom: '5%',
+            height:'2px',
+            marginTop: '1%',
+            marginBottom: '3%',
           }}
           variant='middle'
         />
@@ -215,12 +219,12 @@ function Board(props: BoardProps) {
             color='primary'
             style={{
               backgroundColor: 'red',
-              fontSize: '2.3em',
+              fontSize: '2.2em',
               fontFamily: 'gameria',
             }}>
             Salir
           </Button>
-          <HelpModal fontSize={'2.3em'} />
+          <HelpModal fontSize={'2.2em'} />
         </div>
       </div>
     </>

@@ -9,7 +9,7 @@ function Game() {
   const [showNumbers, setShowNumbers] = useState(true);
   const [isStarted, setIsStarted] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
-  const [dificultad, setDificultad] = useState('facil');
+  const [dificultad, setDificultad] = useState('medio');
   const [contraste, setContraste] = useState('medio');
   const [imageIndex, setImageIndex] = useState(0);
   const [imgUrl, setImgUrl] = useState(images[imageIndex].image);
@@ -83,7 +83,7 @@ function Game() {
               onStart={onStartHandler}
               imgUrl={imgUrl}
               nextImageHanlder={nextImageHanlder}
-              boardSize={320}
+              boardSize={480}
               gridSize={gridSize}
               showNumbers={showNumbers}
               setIsFinished={setIsFinished}
