@@ -1,5 +1,5 @@
 import { Button } from '@material-ui/core';
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Divider from '@material-ui/core/Divider';
 import { useState, CSSProperties } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -51,8 +51,7 @@ function Board(props: BoardProps) {
     imgUrl,
     nextImageHanlder,
     setIsFinished,
-    imageIndex,
-    onStart
+    imageIndex
   } = props;
   const [tiles, setTiles] = useState([...Array(gridSize * gridSize).keys()]);
   const [pieceSize, setPieceSize] = useState(Math.round(boardSize / gridSize));
