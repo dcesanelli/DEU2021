@@ -9,7 +9,7 @@ body {
   background-color: #f0e5d8;
   background-image: url(bos.jpg);
   height: 100%;
-
+  overflow: hidden;
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;

@@ -4,6 +4,7 @@ import Modal from '@material-ui/core/Modal';
 import { Button } from '@material-ui/core';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import LocalSeeIcon from '@material-ui/icons/LocalSee';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -41,7 +42,7 @@ export default function VerImagen(props: VerImagenProps) {
   return (
     <div>
       <Button onClick={handleOpen} variant='contained' color='primary' style={{ fontSize: '2.2em',fontFamily: 'gameria' }}>
-        Ver Imagen
+        Ver Imagen <LocalSeeIcon style={{ fontSize: '2em', fontFamily: 'gameria',paddingLeft: '2px' }}/>
       </Button>
       <Modal
         aria-labelledby='transition-modal-title'

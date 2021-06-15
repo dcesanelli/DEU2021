@@ -33,6 +33,8 @@ function Game() {
   }, [dificultad]);
 
   const onStartHandler = () => {
+    console.log(1);
+    
     setIsStarted(true);
   };
 

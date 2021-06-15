@@ -5,6 +5,8 @@ import { useState, CSSProperties } from 'react';
 import { useHistory } from 'react-router-dom';
 import HelpModal from './HelpModal';
 import Tile from './Tile';
+import CachedIcon from '@material-ui/icons/Cached';
+import FastForwardIcon from '@material-ui/icons/FastForward';
 import VerImagen from './VerImagen';
 import images from './images';
 
@@ -33,8 +35,8 @@ const actionsImageCSS: CSSProperties = {
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
-  padding: '1%',
-  margin: '1%',
+  padding: '0%',
+  margin: '2% 0%',
   fontFamily: 'gameria',
   backgroundColor: '#a3d2ca',
   fontSize: '0.4em',
@@ -50,9 +52,11 @@ function Board(props: BoardProps) {
     nextImageHanlder,
     setIsFinished,
     imageIndex,
+    onStart
   } = props;
   const [tiles, setTiles] = useState([...Array(gridSize * gridSize).keys()]);
   const [pieceSize, setPieceSize] = useState(Math.round(boardSize / gridSize));
+  const [firstTime, setFirstTime] = useState(true);
   const history = useHistory();
 
   function isSolvable(tiles: number[]) {
@@ -142,10 +146,20 @@ function Board(props: BoardProps) {
     setTiles([...Array(gridSize * gridSize).keys()]);
   }, [boardSize, gridSize]);
 
-  useCallback(() => {
-    shuffleTiles();
-    // eslint-disable-next-line
-  }, []);
+  
+  // useCallback(() => {
+  //   shuffleTiles();
+  //   // eslint-disable-next-line
+  // }, []);
+
+  if( firstTime){    
+    setTimeout(() => {
+      handleShuffleClick();
+    }, 2000);
+    setFirstTime(false);
+  }
+  
+
 
   return (
     <>
@@ -159,11 +173,15 @@ function Board(props: BoardProps) {
           }}
           variant='middle'
         />
-        <div>
+        <div
+          style={{
+            textAlign: 'center'
+          }}>
           <ul
             style={{
               width: boardSize,
               height: boardSize,
+              textAlign: 'center',
               borderRadius:'5px',
               border: 'solid white'
             }}
@@ -191,14 +209,14 @@ function Board(props: BoardProps) {
             variant='contained'
             style={{ fontSize: '2.2em', fontFamily: 'gameria' }}
             color='primary'>
-            Mezclar
+            Mezclar   <CachedIcon style={{ fontSize: '2em', fontFamily: 'gameria',paddingLeft: '2px' }}/>
           </Button>
           <Button
             onClick={nextImageHanlder}
             variant='contained'
             style={{ fontSize: '2.2em', fontFamily: 'gameria' }}
             color='primary'>
-            Próxima Imagen
+            Próxima Imagen <FastForwardIcon style={{ fontSize: '2em', fontFamily: 'gameria',paddingLeft: '3px' }}/>
           </Button>
           <VerImagen imgUrl={imgUrl} />
         </div>
