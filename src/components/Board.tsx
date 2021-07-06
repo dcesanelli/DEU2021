@@ -191,6 +191,7 @@ function Board(props: BoardProps) {
               width: boardSize,
               height: boardSize,
               textAlign: 'center',
+              margin: 'auto',
               borderRadius:'5px',
               border: contraste === 'bajo' ? 'solid white' : 'solid black'
             }}
