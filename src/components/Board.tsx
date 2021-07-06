@@ -192,7 +192,7 @@ function Board(props: BoardProps) {
               height: boardSize,
               textAlign: 'center',
               borderRadius:'5px',
-              border: contraste == 'bajo' ? 'solid white' : 'solid black'
+              border: contraste === 'bajo' ? 'solid white' : 'solid black'
             }}
             className='board'>
             {tiles.map((tile, index) => (
@@ -216,14 +216,14 @@ function Board(props: BoardProps) {
           <Button
             onClick={handleShuffleClick}
             variant='contained'
-            style={{ fontSize: '2.2em', fontFamily: 'gameria',backgroundColor: contraste == 'bajo' ? '#1768AC' : 'black' }}
+            style={{ fontSize: '2.2em', fontFamily: 'gameria',backgroundColor: contraste === 'bajo' ? '#1768AC' : 'black' }}
             color='primary'>
             Mezclar   <CachedIcon style={{ fontSize: '2em', fontFamily: 'gameria',paddingLeft: '2px' }}/>
           </Button>
           <Button
             onClick={nextImageHanlder}
             variant='contained'
-            style={{ fontSize: '2.2em', fontFamily: 'gameria',backgroundColor: contraste == 'bajo' ? '#1768AC' : 'black' }}
+            style={{ fontSize: '2.2em', fontFamily: 'gameria',backgroundColor: contraste === 'bajo' ? '#1768AC' : 'black' }}
             color='primary'>
             Próxima Imagen <FastForwardIcon style={{ fontSize: '2em', fontFamily: 'gameria',paddingLeft: '3px' }}/>
           </Button>

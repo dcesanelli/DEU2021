@@ -42,7 +42,7 @@ export default function VerImagen(props: VerImagenProps) {
 
   return (
     <div>
-      <Button onClick={handleOpen} variant='contained' color='primary' style={{ fontSize: '2.2em',fontFamily: 'gameria',backgroundColor: contraste == 'bajo' ? '#1768AC' : 'black' }}>
+      <Button onClick={handleOpen} variant='contained' color='primary' style={{ fontSize: '2.2em',fontFamily: 'gameria',backgroundColor: contraste === 'bajo' ? '#1768AC' : 'black' }}>
         Ver Imagen <LocalSeeIcon style={{ fontSize: '2em', fontFamily: 'gameria',paddingLeft: '2px' }}/>
       </Button>
       <Modal
