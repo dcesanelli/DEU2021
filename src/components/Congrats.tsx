@@ -7,14 +7,24 @@ import images from './images';
 type CongratsProps = {
   nextPuzzle: () => void;
   imageIndex: number;
+  contraste:string;
 };
-const congratsCSS: CSSProperties = {
+const congratsBajoCSS: CSSProperties = {
   textAlign: 'center',
   padding: '1%',
   margin: '2% 20%',
   borderRadius: '8px',
   fontFamily: 'gameria',
   backgroundColor: '#a3d2ca',
+};
+
+const congratsAltoCSS: CSSProperties = {
+  textAlign: 'center',
+  padding: '1%',
+  margin: '2% 20%',
+  borderRadius: '8px',
+  fontFamily: 'gameria',
+  backgroundColor: '#EEEEEE',
 };
 
 const contentCSS: CSSProperties = {
@@ -33,19 +43,17 @@ const actionsButtonsCSS: CSSProperties = {
   padding: '1%',
   margin: '2%',
   fontFamily: 'gameria',
-  backgroundColor: '#a3d2ca',
   fontSize: '0.4em',
 };
 
 function Congrats(props: CongratsProps) {
-  const { nextPuzzle, imageIndex } = props;
+  const { nextPuzzle, imageIndex,contraste } = props;
   const history = useHistory();
 
   return (
     <>
-      <div style={congratsCSS}>
-        <h1>CONTENIDO DESBLOQUEADO !!</h1>
-        <p>{images[imageIndex].name}</p>
+      <div style={contraste === 'bajo' ? congratsBajoCSS : congratsAltoCSS}>
+        <h1>{images[imageIndex].name} DESBLOQUEADO !!</h1>
         <div style={contentCSS}>
           <p>{images[imageIndex].texto}</p>
           <ReactPlayer

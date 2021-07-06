@@ -17,18 +17,28 @@ type BoardProps = {
   isStarted: boolean;
   onStart: () => void;
   imgUrl: string;
+  contraste: string;
   nextImageHanlder: () => void;
   setIsFinished: (isFinished: boolean) => void;
   imageIndex: number;
 };
 
-const boardCSS: CSSProperties = {
+const boardBajoCSS: CSSProperties = {
   textAlign: 'center',
   padding: '2%',
   margin: '1% 32%',
   borderRadius: '8px',
   fontFamily: 'gameria',
   backgroundColor: '#a3d2ca',
+};
+
+const boardAltoCSS: CSSProperties = {
+  textAlign: 'center',
+  padding: '2%',
+  margin: '1% 32%',
+  borderRadius: '8px',
+  fontFamily: 'gameria',
+  backgroundColor: '#EDEDED',
 };
 
 const actionsImageCSS: CSSProperties = {
@@ -38,7 +48,6 @@ const actionsImageCSS: CSSProperties = {
   padding: '0%',
   margin: '2% 0%',
   fontFamily: 'gameria',
-  backgroundColor: '#a3d2ca',
   fontSize: '0.4em',
 };
 
@@ -49,6 +58,7 @@ function Board(props: BoardProps) {
     showNumbers,
     isStarted,
     imgUrl,
+    contraste,
     nextImageHanlder,
     setIsFinished,
     imageIndex
@@ -162,7 +172,7 @@ function Board(props: BoardProps) {
 
   return (
     <>
-      <div style={boardCSS}>
+      <div  style={contraste === 'bajo' ? boardBajoCSS : boardAltoCSS}>
         <h1>{images[imageIndex].name}</h1>
         <Divider
           style={{
@@ -182,7 +192,7 @@ function Board(props: BoardProps) {
               height: boardSize,
               textAlign: 'center',
               borderRadius:'5px',
-              border: 'solid white'
+              border: contraste == 'bajo' ? 'solid white' : 'solid black'
             }}
             className='board'>
             {tiles.map((tile, index) => (
@@ -206,18 +216,18 @@ function Board(props: BoardProps) {
           <Button
             onClick={handleShuffleClick}
             variant='contained'
-            style={{ fontSize: '2.2em', fontFamily: 'gameria' }}
+            style={{ fontSize: '2.2em', fontFamily: 'gameria',backgroundColor: contraste == 'bajo' ? '#1768AC' : 'black' }}
             color='primary'>
             Mezclar   <CachedIcon style={{ fontSize: '2em', fontFamily: 'gameria',paddingLeft: '2px' }}/>
           </Button>
           <Button
             onClick={nextImageHanlder}
             variant='contained'
-            style={{ fontSize: '2.2em', fontFamily: 'gameria' }}
+            style={{ fontSize: '2.2em', fontFamily: 'gameria',backgroundColor: contraste == 'bajo' ? '#1768AC' : 'black' }}
             color='primary'>
             Próxima Imagen <FastForwardIcon style={{ fontSize: '2em', fontFamily: 'gameria',paddingLeft: '3px' }}/>
           </Button>
-          <VerImagen imgUrl={imgUrl} />
+          <VerImagen imgUrl={imgUrl} contraste={contraste} />
         </div>
         <Divider
           style={{
@@ -234,6 +244,7 @@ function Board(props: BoardProps) {
             onClick={() => history.push('/')}
             variant='contained'
             color='primary'
+            
             style={{
               backgroundColor: 'red',
               fontSize: '2.2em',

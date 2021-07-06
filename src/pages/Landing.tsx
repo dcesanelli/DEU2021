@@ -38,9 +38,9 @@ function Landing() {
           }}>
           Diviertase resolviendo puzzles
           <br />
-          aprendiendo de sustentatibilidad.
+          aprendiendo sobre la<br /> sustentatibilidad.
           <br /><br />
-          Ordene las imagenes 
+          Ordene las imagenes correctamente 
 
           para recibir valiosas recompensas.
         </p>

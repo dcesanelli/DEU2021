@@ -24,10 +24,11 @@ const useStyles = makeStyles((theme) => ({
 
 type VerImagenProps = {
   imgUrl: string;
+  contraste: string;
 };
 
 export default function VerImagen(props: VerImagenProps) {
-  const { imgUrl } = props;
+  const { imgUrl,contraste } = props;
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -41,7 +42,7 @@ export default function VerImagen(props: VerImagenProps) {
 
   return (
     <div>
-      <Button onClick={handleOpen} variant='contained' color='primary' style={{ fontSize: '2.2em',fontFamily: 'gameria' }}>
+      <Button onClick={handleOpen} variant='contained' color='primary' style={{ fontSize: '2.2em',fontFamily: 'gameria',backgroundColor: contraste == 'bajo' ? '#1768AC' : 'black' }}>
         Ver Imagen <LocalSeeIcon style={{ fontSize: '2em', fontFamily: 'gameria',paddingLeft: '2px' }}/>
       </Button>
       <Modal

@@ -3,6 +3,8 @@ import HelpModal from './HelpModal';
 import { CSSProperties } from 'react';
 import { Button } from '@material-ui/core';
 import Switch from 'react-switch';
+import InfoIcon from '@material-ui/icons/Info';
+import Tooltip from '@material-ui/core/Tooltip';
 
 type InicioProps = {
   showNumbers: boolean;
@@ -14,7 +16,7 @@ type InicioProps = {
   onStart: () => void;
 };
 
-const inicioCSS: CSSProperties = {
+const inicioBajoCSS: CSSProperties = {
   textAlign: 'center',
   padding: '1%',
   margin: '3% 32%',
@@ -23,8 +25,16 @@ const inicioCSS: CSSProperties = {
   opacity: '0.95',
   backgroundColor: '#a3d2ca',
 };
-
-const itemConfigCSS: CSSProperties = {
+const inicioAltoCSS: CSSProperties = {
+  textAlign: 'center',
+  padding: '1%',
+  margin: '3% 32%',
+  borderRadius: '8px',
+  fontFamily: 'gameria',
+  opacity: '0.95',
+  backgroundColor: '#EEEEEE',
+};
+const itemConfigBajoCSS: CSSProperties = {
   textAlign: 'center',
   padding: '2%',
   margin: '3% 3%',
@@ -32,19 +42,87 @@ const itemConfigCSS: CSSProperties = {
   fontFamily: 'gameria',
   backgroundColor: '#e7d4b5',
 };
-
+const itemConfigAltoCSS: CSSProperties = {
+  textAlign: 'center',
+  padding: '2%',
+  margin: '3% 3%',
+  borderRadius: '8px',
+  fontFamily: 'gameria',
+  backgroundColor: '#000000',
+};
 const buttonGroupCSS: CSSProperties = {
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
   marginTop: '2%',
 };
-
-const buttonCSS: CSSProperties = {
+const contrasteButtons: CSSProperties = {
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  marginTop: '2%',
+};
+const buttonBajoCSS: CSSProperties = {
   fontSize: '1.3em',
   fontFamily: 'gameria',
   backgroundColor: '#ca8a8b',
 };
+const buttonAltoCSS: CSSProperties = {
+  fontSize: '1.3em',
+  fontFamily: 'gameria',
+  backgroundColor: '#FFDDCC',
+};
+const contrasteButtonBajoCSS: CSSProperties = {
+  fontSize: '1.3em',
+  fontFamily: 'gameria',
+  paddingInline:'60px',
+  backgroundColor: '#ca8a8b',
+};
+const contrasteButtonAltoCSS: CSSProperties = {
+  fontSize: '1.3em',
+  fontFamily: 'gameria',
+  paddingInline:'60px',
+  backgroundColor: '#FFDDCC',
+};
+
+function DificultadTooltip(){
+  return (
+    <>
+    <Tooltip 
+      arrow leaveDelay={300}
+      style={{ fontSize: '1em'}} 
+      title={ <h1 style={{ padding: '2px',fontSize: '1.4em'}}>La cantidad de piezas que forman la imagen.<br/>Facil: 4 <br/>Medio:8 <br/>Dificil:16</h1>}>
+      <InfoIcon style={{ marginTop: '0px',marginLeft: '5px',fontSize: '1em'}}/>
+    </Tooltip>
+    </>
+  );
+}
+
+function ShowNumbersTooltip(){
+  return (
+    <>
+    <Tooltip 
+      arrow leaveDelay={300}
+      style={{ fontSize: '1em'}} 
+      title={ <h1 style={{ padding: '2px',fontSize: '1.4em'}}>Cada pieza tiene la ubicacion que le corresponde en la imagen original como ayuda</h1>}>
+      <InfoIcon style={{ marginTop: '0px',marginLeft: '5px',fontSize: '1em'}}/>
+    </Tooltip>
+    </>
+  );
+}
+
+function ContrasteTooltip(){
+  return (
+    <>
+    <Tooltip 
+      arrow leaveDelay={300}
+      style={{ fontSize: '1em'}} 
+      title={ <h1 style={{ padding: '2px',fontSize: '1.4em'}}>Se recomienda contraste alto a personas con dificultad al perficibir colores.</h1>}>
+      <InfoIcon style={{ marginTop: '0px',marginLeft: '5px',fontSize: '1em'}}/>
+    </Tooltip>
+    </>
+  );
+}
 
 function Inicio(props: InicioProps) {
   const {
@@ -67,69 +145,66 @@ function Inicio(props: InicioProps) {
 
   return (
     <>
-      <div style={inicioCSS}>
-        <div style={itemConfigCSS}>
+      <div style={contraste === 'bajo' ? inicioBajoCSS : inicioAltoCSS}>
+        <div style={contraste === 'bajo' ? itemConfigBajoCSS : itemConfigAltoCSS}>
           <div
             style={{
               textAlign: 'center',
               marginTop: '5px',
               fontSize: '1.9em',
+              color: contraste === 'bajo' ? 'black' : '#EDEDED'
             }}>
-            Dificultad
+            Dificultad 
+            {DificultadTooltip()}
           </div>
           <div style={buttonGroupCSS}>
             <Button
               onClick={() => onChangeDificultad('facil')}
               variant='contained'
               disabled={dificultad === 'facil'}
-              style={buttonCSS}>
+              style={ contraste === 'bajo' ? buttonBajoCSS : buttonAltoCSS}>
               Facil
             </Button>
             <Button
               onClick={() => onChangeDificultad('medio')}
               variant='contained'
               disabled={dificultad === 'medio'}
-              style={buttonCSS}>
+              style={ contraste === 'bajo' ? buttonBajoCSS : buttonAltoCSS}>
               Medio
             </Button>
             <Button
               onClick={() => onChangeDificultad('dificil')}
               variant='contained'
               disabled={dificultad === 'dificil'}
-              style={buttonCSS}>
+              style={ contraste === 'bajo' ? buttonBajoCSS : buttonAltoCSS}>
               Dificil
             </Button>
           </div>
         </div>
-        <div style={itemConfigCSS}>
-          <div style={{ textAlign: 'center', fontSize: '1.9em' }}>
+        <div style={contraste === 'bajo' ? itemConfigBajoCSS : itemConfigAltoCSS}>
+          <div style={{ textAlign: 'center', fontSize: '1.9em', color: contraste === 'bajo' ? 'black' : '#EDEDED' }}>
             Mostrar numeros
+            {ShowNumbersTooltip()}
           </div>
           <Switch onChange={onSwitchChange} checked={showNumbers} />
         </div>
-        <div style={itemConfigCSS}>
-          <div style={{ textAlign: 'center', fontSize: '1.9em' }}>
+        <div style={contraste === 'bajo' ? itemConfigBajoCSS : itemConfigAltoCSS}>
+          <div style={{ textAlign: 'center', fontSize: '1.9em', color: contraste === 'bajo' ? 'black' : '#EDEDED'  }}>
             Contraste
+            {ContrasteTooltip()}
           </div>
-          <div style={buttonGroupCSS}>
+          <div style={contrasteButtons}>
             <Button
               onClick={() => onChangeContraste('bajo')}
               variant='contained'
-              style={buttonCSS}
+              style={ contraste === 'bajo' ? contrasteButtonBajoCSS : contrasteButtonAltoCSS}
               disabled={contraste === 'bajo'}>
               Bajo
             </Button>
             <Button
-              onClick={() => onChangeContraste('medio')}
-              variant='contained'
-              style={buttonCSS}
-              disabled={contraste === 'medio'}>
-              Medio
-            </Button>
-            <Button
               onClick={() => onChangeContraste('alto')}
               variant='contained'
-              style={buttonCSS}
+              style={ contraste === 'bajo' ? contrasteButtonBajoCSS : contrasteButtonAltoCSS}
               disabled={contraste === 'alto'}>
               Alto
             </Button>

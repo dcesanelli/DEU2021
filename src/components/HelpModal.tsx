@@ -4,7 +4,7 @@ import Modal from '@material-ui/core/Modal';
 import { Button } from '@material-ui/core';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import HelpOutlineTwoToneIcon from '@material-ui/icons/HelpOutlineTwoTone';
+import HelpIcon from '@material-ui/icons/Help';
 
 type HelpModalProps = {
   fontSize: string;
@@ -48,7 +48,7 @@ export default function HelpModal(props: HelpModalProps) {
           fontFamily: 'gameria',
           fontSize: props.fontSize,
         }}>
-        Como se juega <HelpOutlineTwoToneIcon />
+        Como se juega <HelpIcon style={{ marginLeft:'3px'}}></HelpIcon>
       </Button>
       <Modal
         aria-labelledby='transition-modal-title'

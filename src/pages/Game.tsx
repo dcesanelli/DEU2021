@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Board from '../components/Board';
 import Congrats from '../components/Congrats';
 import images from '../components/images';
@@ -10,7 +10,7 @@ function Game() {
   const [isStarted, setIsStarted] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const [dificultad, setDificultad] = useState('medio');
-  const [contraste, setContraste] = useState('medio');
+  const [contraste, setContraste] = useState('bajo');
   const [imageIndex, setImageIndex] = useState(0);
   const [imgUrl, setImgUrl] = useState(images[imageIndex].image);
 
@@ -86,6 +86,7 @@ function Game() {
               imgUrl={imgUrl}
               nextImageHanlder={nextImageHanlder}
               boardSize={480}
+              contraste={contraste}
               gridSize={gridSize}
               showNumbers={showNumbers}
               setIsFinished={setIsFinished}
@@ -93,7 +94,7 @@ function Game() {
             />
           )
         ) : (
-          <Congrats nextPuzzle={nextPuzzle} imageIndex={imageIndex} />
+          <Congrats nextPuzzle={nextPuzzle} contraste={contraste} imageIndex={imageIndex} />
         )}
       </div>
     </>
