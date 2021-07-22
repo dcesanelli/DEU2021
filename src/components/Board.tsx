@@ -137,7 +137,9 @@ function Board(props: BoardProps) {
 
       // Si el juego inició y esta resuelto muestro el texto final
       if (isStarted && isSolved(swappedTiles)) {
-        setIsFinished(true);
+        setTimeout(() => {
+          setIsFinished(true);
+        }, 5000);
       }
     }
   };

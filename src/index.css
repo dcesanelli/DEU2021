@@ -49,3 +49,8 @@ button {
   src: local('gameria'), url('./fonts/GAMERIA.ttf') format('truetype');
   font-weight: normal;
 }
+
+.MuiButton-contained.Mui-disabled{
+  color: #000 !important;
+  background: #CCC !important;
+}
