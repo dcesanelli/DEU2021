@@ -1,3 +1,4 @@
+import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import { useEffect, useState } from 'react';
 import Board from '../components/Board';
 import Congrats from '../components/Congrats';
@@ -6,6 +7,7 @@ import Inicio from '../components/Inicio';
 
 function Game() {
   const [gridSize, setGridSize] = useState(4);
+  const [boardSize, setBoardSize] = useState(480);
   const [showNumbers, setShowNumbers] = useState(true);
   const [isStarted, setIsStarted] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
@@ -13,6 +15,10 @@ function Game() {
   const [contraste, setContraste] = useState('bajo');
   const [imageIndex, setImageIndex] = useState(0);
   const [imgUrl, setImgUrl] = useState(images[imageIndex].image);
+
+  const GameMainCSS: CSSProperties = {
+    padding: '20px',
+  };
 
   useEffect(() => {
     switch (dificultad) {
@@ -31,10 +37,15 @@ function Game() {
         break;
     }
   }, [dificultad]);
+  const handleZoomInClick = () => {
+    setBoardSize(boardSize + 30);
+  };
+
+  const handleZoomOutClick = () => {
+    setBoardSize(boardSize - 30);
+  };
 
   const onStartHandler = () => {
-    console.log(1);
-    
     setIsStarted(true);
   };
 
@@ -67,7 +78,7 @@ function Game() {
 
   return (
     <>
-      <div>
+      <div style={GameMainCSS}>
         {!isFinished ? (
           !isStarted ? (
             <Inicio
@@ -78,6 +89,9 @@ function Game() {
               contraste={contraste}
               changeContraste={contrasteHandler}
               onStart={onStartHandler}
+              boardSize={boardSize}
+              handleZoomInClick={handleZoomInClick}
+              handleZoomOutClick={handleZoomOutClick}
             />
           ) : (
             <Board
@@ -85,16 +99,22 @@ function Game() {
               onStart={onStartHandler}
               imgUrl={imgUrl}
               nextImageHanlder={nextImageHanlder}
-              boardSize={480}
+              boardSize={boardSize}
               contraste={contraste}
               gridSize={gridSize}
               showNumbers={showNumbers}
               setIsFinished={setIsFinished}
               imageIndex={imageIndex}
+              handleZoomInClick={handleZoomInClick}
+              handleZoomOutClick={handleZoomOutClick}
             />
           )
         ) : (
-          <Congrats nextPuzzle={nextPuzzle} contraste={contraste} imageIndex={imageIndex} />
+          <Congrats
+            nextPuzzle={nextPuzzle}
+            contraste={contraste}
+            imageIndex={imageIndex}
+          />
         )}
       </div>
     </>

@@ -7,6 +7,8 @@ import HelpModal from './HelpModal';
 import Tile from './Tile';
 import CachedIcon from '@material-ui/icons/Cached';
 import FastForwardIcon from '@material-ui/icons/FastForward';
+import ZoomInIcon from '@material-ui/icons/ZoomIn';
+import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import VerImagen from './VerImagen';
 import images from './images';
 
@@ -21,23 +23,25 @@ type BoardProps = {
   nextImageHanlder: () => void;
   setIsFinished: (isFinished: boolean) => void;
   imageIndex: number;
+  handleZoomInClick: () => void;
+  handleZoomOutClick: () => void;
+};
+
+const boardCSS: CSSProperties = {
+  textAlign: 'center',
+  padding: '2%',
+  margin: '0 auto',
+  borderRadius: '8px',
+  fontFamily: 'gameria',
 };
 
 const boardBajoCSS: CSSProperties = {
-  textAlign: 'center',
-  padding: '2%',
-  margin: '1% 32%',
-  borderRadius: '8px',
-  fontFamily: 'gameria',
+  ...boardCSS,
   backgroundColor: '#a3d2ca',
 };
 
 const boardAltoCSS: CSSProperties = {
-  textAlign: 'center',
-  padding: '2%',
-  margin: '1% 32%',
-  borderRadius: '8px',
-  fontFamily: 'gameria',
+  ...boardCSS,
   backgroundColor: '#EDEDED',
 };
 
@@ -45,8 +49,8 @@ const actionsImageCSS: CSSProperties = {
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
-  padding: '0%',
-  margin: '2% 0%',
+  padding: '0',
+  margin: '2% 0',
   fontFamily: 'gameria',
   fontSize: '0.4em',
 };
@@ -61,7 +65,9 @@ function Board(props: BoardProps) {
     contraste,
     nextImageHanlder,
     setIsFinished,
-    imageIndex
+    imageIndex,
+    handleZoomInClick,
+    handleZoomOutClick,
   } = props;
   const [tiles, setTiles] = useState([...Array(gridSize * gridSize).keys()]);
   const [pieceSize, setPieceSize] = useState(Math.round(boardSize / gridSize));
@@ -88,7 +94,6 @@ function Board(props: BoardProps) {
   }
 
   function shuffle(tiles: number[]): number[] {
-    console.log(tiles);
     const shuffledTiles = [
       ...tiles
         .filter((t) => t !== tiles.length - 1)
@@ -157,24 +162,25 @@ function Board(props: BoardProps) {
     setTiles([...Array(gridSize * gridSize).keys()]);
   }, [boardSize, gridSize]);
 
-  
-  // useCallback(() => {
-  //   shuffleTiles();
-  //   // eslint-disable-next-line
-  // }, []);
+  useEffect(() => {
+    shuffleTiles();
+    // eslint-disable-next-line
+  }, [boardSize]);
 
-  if( firstTime){    
+  if (firstTime) {
     setTimeout(() => {
       handleShuffleClick();
     }, 2000);
     setFirstTime(false);
   }
-  
-
 
   return (
     <>
-      <div  style={contraste === 'bajo' ? boardBajoCSS : boardAltoCSS}>
+      <div
+        style={{
+          ...(contraste === 'bajo' ? boardBajoCSS : boardAltoCSS),
+          width: boardSize,
+        }}>
         <h1>{images[imageIndex].name}</h1>
         <Divider
           style={{
@@ -186,7 +192,7 @@ function Board(props: BoardProps) {
         />
         <div
           style={{
-            textAlign: 'center'
+            textAlign: 'center',
           }}>
           <ul
             style={{
@@ -194,8 +200,8 @@ function Board(props: BoardProps) {
               height: boardSize,
               textAlign: 'center',
               margin: 'auto',
-              borderRadius:'5px',
-              border: contraste === 'bajo' ? 'solid white' : 'solid black'
+              borderRadius: '5px',
+              border: contraste === 'bajo' ? 'solid white' : 'solid black',
             }}
             className='board'>
             {tiles.map((tile, index) => (
@@ -219,16 +225,38 @@ function Board(props: BoardProps) {
           <Button
             onClick={handleShuffleClick}
             variant='contained'
-            style={{ fontSize: '2.2em', fontFamily: 'gameria',backgroundColor: contraste === 'bajo' ? '#1768AC' : 'black' }}
+            style={{
+              fontSize: '2.2em',
+              fontFamily: 'gameria',
+              backgroundColor: contraste === 'bajo' ? '#1768AC' : 'black',
+            }}
             color='primary'>
-            Mezclar   <CachedIcon style={{ fontSize: '2em', fontFamily: 'gameria',paddingLeft: '2px' }}/>
+            Mezclar
+            <CachedIcon
+              style={{
+                fontSize: '2em',
+                fontFamily: 'gameria',
+                paddingLeft: '2px',
+              }}
+            />
           </Button>
           <Button
             onClick={nextImageHanlder}
             variant='contained'
-            style={{ fontSize: '2.2em', fontFamily: 'gameria',backgroundColor: contraste === 'bajo' ? '#1768AC' : 'black' }}
+            style={{
+              fontSize: '2.2em',
+              fontFamily: 'gameria',
+              backgroundColor: contraste === 'bajo' ? '#1768AC' : 'black',
+            }}
             color='primary'>
-            Próxima Imagen <FastForwardIcon style={{ fontSize: '2em', fontFamily: 'gameria',paddingLeft: '3px' }}/>
+            Próxima Imagen
+            <FastForwardIcon
+              style={{
+                fontSize: '2em',
+                fontFamily: 'gameria',
+                paddingLeft: '3px',
+              }}
+            />
           </Button>
           <VerImagen imgUrl={imgUrl} contraste={contraste} />
         </div>
@@ -236,7 +264,7 @@ function Board(props: BoardProps) {
           style={{
             marginInline: '10%',
             backgroundColor: 'black',
-            height:'2px',
+            height: '2px',
             marginTop: '1%',
             marginBottom: '3%',
           }}
@@ -247,13 +275,50 @@ function Board(props: BoardProps) {
             onClick={() => history.push('/')}
             variant='contained'
             color='primary'
-            
             style={{
               backgroundColor: 'red',
               fontSize: '2.2em',
               fontFamily: 'gameria',
             }}>
             Salir
+          </Button>
+          <Button
+            onClick={handleZoomOutClick}
+            variant='contained'
+            style={{
+              padding: '0 5px',
+              fontSize: '2.2em',
+              fontFamily: 'gameria',
+              backgroundColor: contraste === 'bajo' ? '#1768AC' : 'black',
+            }}
+            color='primary'>
+            Achicar
+            <ZoomOutIcon
+              style={{
+                fontSize: '2em',
+                fontFamily: 'gameria',
+                paddingLeft: '3px',
+              }}
+            />
+          </Button>
+          <Button
+            onClick={handleZoomInClick}
+            variant='contained'
+            style={{
+              padding: '0 5px',
+              fontSize: '2.2em',
+              fontFamily: 'gameria',
+              backgroundColor: contraste === 'bajo' ? '#1768AC' : 'black',
+            }}
+            color='primary'>
+            Agrandar
+            <ZoomInIcon
+              style={{
+                fontSize: '2em',
+                fontFamily: 'gameria',
+                paddingLeft: '3px',
+              }}
+            />
           </Button>
           <HelpModal fontSize={'2.2em'} />
         </div>
