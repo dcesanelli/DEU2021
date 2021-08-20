@@ -48,7 +48,7 @@ export default function HelpModal(props: HelpModalProps) {
           fontFamily: 'gameria',
           fontSize: props.fontSize,
         }}>
-        Como se juega <HelpIcon style={{ marginLeft:'3px'}}></HelpIcon>
+        Como se juega <HelpIcon style={{ marginLeft: '3px' }}></HelpIcon>
       </Button>
       <Modal
         aria-labelledby='transition-modal-title'
@@ -76,7 +76,11 @@ export default function HelpModal(props: HelpModalProps) {
               3. Para cambiar a la siguiente imagen presioná "Próxima Imagen".
             </p>
             <p id='transition-modal-description'>
-              4. Presiona el botón "Ver Imagen" para ver la imagen que deberás
+              4. Para modificar el tamaño de lo imagen presioná "Achicar" o
+              "Agrandar".
+            </p>
+            <p id='transition-modal-description'>
+              5. Presiona el botón "Ver Imagen" para ver la imagen que deberás
               armar.
             </p>
             <h2 id='transition-modal-title' style={{ textAlign: 'center' }}>
