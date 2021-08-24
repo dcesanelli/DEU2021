@@ -76,7 +76,7 @@ export default function HelpModal(props: HelpModalProps) {
               3. Para cambiar a la siguiente imagen presioná "Próxima Imagen".
             </p>
             <p id='transition-modal-description'>
-              4. Para modificar el tamaño de lo imagen presioná "Achicar" o
+              4. Para modificar la medida de la imagen presioná "Achicar" o
               "Agrandar".
             </p>
             <p id='transition-modal-description'>

@@ -146,7 +146,7 @@ function ContrasteTooltip() {
   );
 }
 
-function TamañoTooltip() {
+function MedidaTooltip() {
   return (
     <>
       <Tooltip
@@ -155,7 +155,7 @@ function TamañoTooltip() {
         style={{ fontSize: '1em' }}
         title={
           <h1 style={{ padding: '2px', fontSize: '1.4em' }}>
-            Modificar tamaño de del puzzle.
+            Modificar medida del puzzle.
           </h1>
         }>
         <InfoIcon
@@ -288,8 +288,8 @@ function Inicio(props: InicioProps) {
               fontSize: '1.9em',
               color: contraste === 'bajo' ? 'black' : '#EDEDED',
             }}>
-            Tamaño
-            {TamañoTooltip()}
+            Medida del puzzle
+            {MedidaTooltip()}
           </div>
           <div style={buttonGroupCSS}>
             <Button
