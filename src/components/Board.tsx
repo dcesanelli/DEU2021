@@ -14,6 +14,7 @@ import images from './images';
 
 type BoardProps = {
   boardSize: number;
+  zoom: number;
   gridSize: number;
   showNumbers: boolean;
   isStarted: boolean;
@@ -58,6 +59,7 @@ const actionsImageCSS: CSSProperties = {
 function Board(props: BoardProps) {
   const {
     boardSize,
+    zoom,
     gridSize,
     showNumbers,
     isStarted,
@@ -284,6 +286,7 @@ function Board(props: BoardProps) {
           </Button>
           <Button
             onClick={handleZoomOutClick}
+            disabled={zoom < 1}
             variant='contained'
             style={{
               padding: '0 5px',
@@ -303,6 +306,7 @@ function Board(props: BoardProps) {
           </Button>
           <Button
             onClick={handleZoomInClick}
+            disabled={zoom > 7}
             variant='contained'
             style={{
               padding: '0 5px',

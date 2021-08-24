@@ -15,6 +15,7 @@ type InicioProps = {
   changeContraste: (item: string) => void;
   onStart: () => void;
   boardSize: number;
+  zoom: number;
   handleZoomInClick: () => void;
   handleZoomOutClick: () => void;
 };
@@ -176,6 +177,7 @@ function Inicio(props: InicioProps) {
     contraste,
     changeContraste,
     boardSize,
+    zoom,
     handleZoomInClick,
     handleZoomOutClick,
   } = props;
@@ -295,6 +297,7 @@ function Inicio(props: InicioProps) {
             <Button
               onClick={handleZoomOutClick}
               variant='contained'
+              disabled={zoom < 1}
               style={
                 contraste === 'bajo'
                   ? contrasteButtonBajoCSS
@@ -305,6 +308,7 @@ function Inicio(props: InicioProps) {
             <Button
               onClick={handleZoomInClick}
               variant='contained'
+              disabled={zoom > 7}
               style={
                 contraste === 'bajo'
                   ? contrasteButtonBajoCSS

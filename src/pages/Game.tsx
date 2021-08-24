@@ -7,6 +7,7 @@ import Inicio from '../components/Inicio';
 
 function Game() {
   const [gridSize, setGridSize] = useState(4);
+  const [zoom, setZoom] = useState(4);
   const [boardSize, setBoardSize] = useState(480);
   const [showNumbers, setShowNumbers] = useState(true);
   const [isStarted, setIsStarted] = useState(false);
@@ -38,12 +39,20 @@ function Game() {
     }
   }, [dificultad]);
   const handleZoomInClick = () => {
-    setBoardSize(boardSize + 30);
+    if (zoom < 8) {
+      setZoom(zoom + 1);
+    }
   };
 
   const handleZoomOutClick = () => {
-    setBoardSize(boardSize - 30);
+    if (zoom > 0) {
+      setZoom(zoom - 1);
+    }
   };
+
+  useEffect(() => {
+    setBoardSize(480 + zoom * 30);
+  }, [zoom]);
 
   const onStartHandler = () => {
     setIsStarted(true);
@@ -90,6 +99,7 @@ function Game() {
               changeContraste={contrasteHandler}
               onStart={onStartHandler}
               boardSize={boardSize}
+              zoom={zoom}
               handleZoomInClick={handleZoomInClick}
               handleZoomOutClick={handleZoomOutClick}
             />
@@ -100,6 +110,7 @@ function Game() {
               imgUrl={imgUrl}
               nextImageHanlder={nextImageHanlder}
               boardSize={boardSize}
+              zoom={zoom}
               contraste={contraste}
               gridSize={gridSize}
               showNumbers={showNumbers}
