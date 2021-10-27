@@ -25,15 +25,15 @@ function Tile(props: TileProps) {
     boardSize,
     gridSize,
     showNumbers,
-    isSolved,
+    isSolved
   } = props;
   const { row, col } = {
     row: Math.floor(index / gridSize),
-    col: index % gridSize,
+    col: index % gridSize
   };
   const visualPos = {
     x: col * width,
-    y: row * height,
+    y: row * height
   };
 
   const tileStyle = {
@@ -45,18 +45,18 @@ function Tile(props: TileProps) {
     backgroundSize: `${boardSize}px`,
     backgroundPosition: `${(boardSize / gridSize) * -1 * (tile % gridSize)}px ${
       (boardSize / gridSize) * -1 * Math.floor(tile / gridSize)
-    }px`,
+    }px`
   };
   const motionStyle = {
     translateX: spring(visualPos.x),
-    translateY: spring(visualPos.y),
+    translateY: spring(visualPos.y)
   };
   const numberStyle = {
     color: 'white',
     background: 'gray',
     padding: '5px 10px',
     borderRadius: '15px',
-    textAlign: 'center' as const,
+    textAlign: 'center' as const
   };
   return (
     <Motion style={motionStyle}>
@@ -66,10 +66,11 @@ function Tile(props: TileProps) {
             ...tileStyle,
             transform: `translate3d(${translateX}px, ${translateY}px, 0)`,
             // Si es el último y no está resuelto, se oculta
-            opacity: !isSolved && tile === gridSize * gridSize - 1 ? 0 : 1,
+            opacity: !isSolved && tile === gridSize * gridSize - 1 ? 0 : 1
           }}
-          className='tile'
-          onClick={() => handleTileClick(index)}>
+          className="tile"
+          onClick={() => handleTileClick(index)}
+        >
           {(!imgUrl || showNumbers) && (
             <div style={numberStyle}>{`${tile + 1}`}</div>
           )}

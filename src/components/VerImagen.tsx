@@ -6,20 +6,23 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import LocalSeeIcon from '@material-ui/icons/LocalSee';
 
-const useStyles = makeStyles((theme) => ({
+import '../config/i18n';
+import { useTranslation } from 'react-i18next';
+
+const useStyles = makeStyles(theme => ({
   modal: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    outlineColor: '#eb5e0b',
+    outlineColor: '#eb5e0b'
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     outlineColor: '#eb5e0b',
-    outline: '5',
-  },
+    outline: '5'
+  }
 }));
 
 type VerImagenProps = {
@@ -28,9 +31,10 @@ type VerImagenProps = {
 };
 
 export default function VerImagen(props: VerImagenProps) {
-  const { imgUrl,contraste } = props;
+  const { imgUrl, contraste } = props;
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const { t } = useTranslation();
 
   const handleOpen = () => {
     setOpen(true);
@@ -42,23 +46,36 @@ export default function VerImagen(props: VerImagenProps) {
 
   return (
     <div>
-      <Button onClick={handleOpen} variant='contained' color='primary' style={{ fontSize: '2.2em',fontFamily: 'gameria',backgroundColor: contraste === 'bajo' ? '#1768AC' : 'black' }}>
-        Ver Imagen <LocalSeeIcon style={{ fontSize: '2em', fontFamily: 'gameria',paddingLeft: '2px' }}/>
+      <Button
+        onClick={handleOpen}
+        variant="contained"
+        color="primary"
+        style={{
+          fontSize: '2.2em',
+          fontFamily: 'gameria',
+          backgroundColor: contraste === 'bajo' ? '#1768AC' : 'black'
+        }}
+      >
+        {t('board.SHOW_IMAGE')}
+        <LocalSeeIcon
+          style={{ fontSize: '2em', fontFamily: 'gameria', paddingLeft: '2px' }}
+        />
       </Button>
       <Modal
-        aria-labelledby='transition-modal-title'
-        aria-describedby='transition-modal-description'
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
         className={classes.modal}
         open={open}
         onClose={handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
-          timeout: 500,
-        }}>
+          timeout: 500
+        }}
+      >
         <Fade in={open}>
-          <div className={classes.paper} >
-            <img src={imgUrl} alt='Imagen resuelta' style={{ width: '100%'}} />
+          <div className={classes.paper}>
+            <img src={imgUrl} alt="Imagen resuelta" style={{ width: '100%' }} />
           </div>
         </Fade>
       </Modal>

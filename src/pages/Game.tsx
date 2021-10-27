@@ -18,7 +18,7 @@ function Game() {
   const [imgUrl, setImgUrl] = useState(images[imageIndex].image);
 
   const GameMainCSS: CSSProperties = {
-    padding: '20px',
+    padding: '20px'
   };
 
   useEffect(() => {

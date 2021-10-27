@@ -50,7 +50,7 @@ button {
   font-weight: normal;
 }
 
-.MuiButton-contained.Mui-disabled{
+.MuiButton-contained.Mui-disabled {
   color: #000 !important;
-  background: #CCC !important;
+  background: #ccc !important;
 }

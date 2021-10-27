@@ -12,6 +12,9 @@ import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import VerImagen from './VerImagen';
 import images from './images';
 
+import '../config/i18n';
+import { useTranslation } from 'react-i18next';
+
 type BoardProps = {
   boardSize: number;
   zoom: number;
@@ -33,17 +36,17 @@ const boardCSS: CSSProperties = {
   padding: '2%',
   margin: '0 auto',
   borderRadius: '8px',
-  fontFamily: 'gameria',
+  fontFamily: 'gameria'
 };
 
 const boardBajoCSS: CSSProperties = {
   ...boardCSS,
-  backgroundColor: '#a3d2ca',
+  backgroundColor: '#a3d2ca'
 };
 
 const boardAltoCSS: CSSProperties = {
   ...boardCSS,
-  backgroundColor: '#EDEDED',
+  backgroundColor: '#EDEDED'
 };
 
 const actionsImageCSS: CSSProperties = {
@@ -53,7 +56,7 @@ const actionsImageCSS: CSSProperties = {
   padding: '0',
   margin: '2% 0',
   fontFamily: 'gameria',
-  fontSize: '0.4em',
+  fontSize: '0.4em'
 };
 
 function Board(props: BoardProps) {
@@ -69,12 +72,13 @@ function Board(props: BoardProps) {
     setIsFinished,
     imageIndex,
     handleZoomInClick,
-    handleZoomOutClick,
+    handleZoomOutClick
   } = props;
   const [tiles, setTiles] = useState([...Array(gridSize * gridSize).keys()]);
   const [pieceSize, setPieceSize] = useState(Math.round(boardSize / gridSize));
   const [firstTime, setFirstTime] = useState(true);
   const history = useHistory();
+  const { t } = useTranslation();
 
   function isSolvable(tiles: number[]) {
     let product = 1;
@@ -98,9 +102,9 @@ function Board(props: BoardProps) {
   function shuffle(tiles: number[]): number[] {
     const shuffledTiles = [
       ...tiles
-        .filter((t) => t !== tiles.length - 1)
+        .filter(t => t !== tiles.length - 1)
         .sort(() => Math.random() - 0.5),
-      tiles.length - 1,
+      tiles.length - 1
     ];
     return isSolvable(shuffledTiles) && !isSolved(shuffledTiles)
       ? shuffledTiles
@@ -110,11 +114,11 @@ function Board(props: BoardProps) {
   function canSwap(srcIndex: number, destIndex: number) {
     const { row: srcRow, col: srcCol } = {
       row: Math.floor(srcIndex / gridSize),
-      col: srcIndex % gridSize,
+      col: srcIndex % gridSize
     };
     const { row: destRow, col: destCol } = {
       row: Math.floor(destIndex / gridSize),
-      col: destIndex % gridSize,
+      col: destIndex % gridSize
     };
     return Math.abs(srcRow - destRow) + Math.abs(srcCol - destCol) === 1;
   }
@@ -123,7 +127,7 @@ function Board(props: BoardProps) {
     const tilesResult = [...tiles];
     [tilesResult[src], tilesResult[dest]] = [
       tilesResult[dest],
-      tilesResult[src],
+      tilesResult[src]
     ];
     return tilesResult;
   }
@@ -181,21 +185,23 @@ function Board(props: BoardProps) {
       <div
         style={{
           ...(contraste === 'bajo' ? boardBajoCSS : boardAltoCSS),
-          width: boardSize,
-        }}>
-        <h1>{images[imageIndex].name}</h1>
+          width: boardSize
+        }}
+      >
+        <h1>{t('images.title.' + images[imageIndex].name)}</h1>
         <Divider
           style={{
             marginInline: '10%',
             backgroundColor: 'black',
-            marginBottom: '3%',
+            marginBottom: '3%'
           }}
-          variant='middle'
+          variant="middle"
         />
         <div
           style={{
-            textAlign: 'center',
-          }}>
+            textAlign: 'center'
+          }}
+        >
           <ul
             style={{
               width: boardSize,
@@ -203,9 +209,10 @@ function Board(props: BoardProps) {
               textAlign: 'center',
               margin: 'auto',
               borderRadius: '5px',
-              border: contraste === 'bajo' ? 'solid white' : 'solid black',
+              border: contraste === 'bajo' ? 'solid white' : 'solid black'
             }}
-            className='board'>
+            className="board"
+          >
             {tiles.map((tile, index) => (
               <Tile
                 key={tile}
@@ -226,37 +233,39 @@ function Board(props: BoardProps) {
         <div style={actionsImageCSS}>
           <Button
             onClick={handleShuffleClick}
-            variant='contained'
+            variant="contained"
             style={{
               fontSize: '2.2em',
               fontFamily: 'gameria',
-              backgroundColor: contraste === 'bajo' ? '#1768AC' : 'black',
+              backgroundColor: contraste === 'bajo' ? '#1768AC' : 'black'
             }}
-            color='primary'>
-            Mezclar
+            color="primary"
+          >
+            {t('board.SHUFFLE')}
             <CachedIcon
               style={{
                 fontSize: '2em',
                 fontFamily: 'gameria',
-                paddingLeft: '2px',
+                paddingLeft: '2px'
               }}
             />
           </Button>
           <Button
             onClick={nextImageHanlder}
-            variant='contained'
+            variant="contained"
             style={{
               fontSize: '2.2em',
               fontFamily: 'gameria',
-              backgroundColor: contraste === 'bajo' ? '#1768AC' : 'black',
+              backgroundColor: contraste === 'bajo' ? '#1768AC' : 'black'
             }}
-            color='primary'>
-            Próxima Imagen
+            color="primary"
+          >
+            {t('board.NEXT')}
             <FastForwardIcon
               style={{
                 fontSize: '2em',
                 fontFamily: 'gameria',
-                paddingLeft: '3px',
+                paddingLeft: '3px'
               }}
             />
           </Button>
@@ -268,59 +277,62 @@ function Board(props: BoardProps) {
             backgroundColor: 'black',
             height: '2px',
             marginTop: '1%',
-            marginBottom: '3%',
+            marginBottom: '3%'
           }}
-          variant='middle'
+          variant="middle"
         />
         <div style={actionsImageCSS}>
           <Button
             onClick={() => history.push('/')}
-            variant='contained'
-            color='primary'
+            variant="contained"
+            color="primary"
             style={{
               backgroundColor: 'red',
               fontSize: '2.2em',
-              fontFamily: 'gameria',
-            }}>
-            Salir
+              fontFamily: 'gameria'
+            }}
+          >
+            {t('board.EXIT')}
           </Button>
           <Button
             onClick={handleZoomOutClick}
             disabled={zoom < 1}
-            variant='contained'
+            variant="contained"
             style={{
               padding: '0 5px',
               fontSize: '2.2em',
               fontFamily: 'gameria',
-              backgroundColor: contraste === 'bajo' ? '#1768AC' : 'black',
+              backgroundColor: contraste === 'bajo' ? '#1768AC' : 'black'
             }}
-            color='primary'>
-            Achicar
+            color="primary"
+          >
+            {t('board.REDUCE')}
             <ZoomOutIcon
               style={{
                 fontSize: '2em',
                 fontFamily: 'gameria',
-                paddingLeft: '3px',
+                paddingLeft: '3px'
               }}
             />
           </Button>
           <Button
             onClick={handleZoomInClick}
             disabled={zoom > 7}
-            variant='contained'
+            variant="contained"
             style={{
               padding: '0 5px',
               fontSize: '2.2em',
               fontFamily: 'gameria',
-              backgroundColor: contraste === 'bajo' ? '#1768AC' : 'black',
+              backgroundColor: contraste === 'bajo' ? '#1768AC' : 'black'
             }}
-            color='primary'>
-            Agrandar
+            color="primary"
+          >
+            {t('board.ENLARGE')}
             <ZoomInIcon
               style={{
                 fontSize: '2em',
                 fontFamily: 'gameria',
-                paddingLeft: '3px',
+                paddingLeft: '3px'
               }}
             />
           </Button>

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import './fonts/GAMERIA.ttf'; 
+import './fonts/GAMERIA.ttf';
 
 ReactDOM.render(
   <React.StrictMode>
