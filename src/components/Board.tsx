@@ -150,7 +150,7 @@ function Board(props: BoardProps) {
       if (isStarted && isSolved(swappedTiles)) {
         setTimeout(() => {
           setIsFinished(true);
-        }, 5000);
+        }, 3000);
       }
     }
   };
